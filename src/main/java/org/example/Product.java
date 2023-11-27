@@ -1,14 +1,15 @@
 package org.example;
 
 public class Product {
-    private int id;
-    private String productName;
-    private int quantity;
+    int quantity;
+    String name;
+    int cost;
+    String category;
 
-    public Product(int id, String productName, int quantity) {
-        this.id = id;
-        this.productName = productName;
-        this.quantity = quantity;
+    public Product(String name, int cost, String category) {
+        this.name = name;
+        this.cost = cost;
+        this.category = category;
     }
 
     private boolean checkQuantity(int quantity){
@@ -20,28 +21,10 @@ public class Product {
             return false;
         }
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    public String GetDescription() {
+        return name + ", " + cost + ", " + category;
     }
 }

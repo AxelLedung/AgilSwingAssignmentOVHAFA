@@ -1,17 +1,14 @@
 package org.example;
 
 import java.util.ArrayList;
-
-public class Customer {
+public class Customer extends User{
     private int id;
     private String username;
     private String password;
     private int balance;
 
     public Customer(int id, String username, String password, int balance) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+        super(id, username, password);
         this.balance = balance;
     }
 

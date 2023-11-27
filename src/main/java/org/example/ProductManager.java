@@ -3,24 +3,27 @@ package org.example;
 import java.util.ArrayList;
 
 public class ProductManager {
-     ArrayList<Product> productList = new ArrayList<>();
+    ArrayList<Product> productArrayList = new ArrayList<Product>();
 
      public ProductManager(){
-         productList.add(new Product(1,"Thing 1", 20));
-         productList.add(new Product(2,"Thing 2", 200));
-         productList.add(new Product(3,"Thing 3", 12));
-         productList.add(new Product(4,"Thing 4", 1));
-         productList.add(new Product(5,"Thing 5", 53));
-         productList.add(new Product(6,"Thing 6", 67));
-         productList.add(new Product(7,"Thing 7", 80));
-         productList.add(new Product(8,"Thing 8", 90));
-         productList.add(new Product(9,"Thing 9", 34));
-         productList.add(new Product(10,"Thing 10", 32));
-         productList.add(new Product(11,"Thing 11", 21));
-         productList.add(new Product(12,"Thing 12", 9999));
+         productArrayList.add(new Product("Thing 1", 20,"Hardware"));
+         productArrayList.add(new Product("Thing 2", 200,"Hardware"));
+         productArrayList.add(new Product("Thing 3", 12,"Hardware"));
+         productArrayList.add(new Product("Thing 4", 1,"Tool"));
+         productArrayList.add(new Product("Thing 5", 53,"Tool"));
+         productArrayList.add(new Product("Thing 6", 67,"Tool"));
+         productArrayList.add(new Product("Thing 7", 80,"Tool"));
+         productArrayList.add(new Product("Thing 8", 90,"Tool"));
+         productArrayList.add(new Product("Thing 9", 34,"Tool"));
+         productArrayList.add(new Product("Thing 10", 32,"Tool"));
+         productArrayList.add(new Product("Thing 11", 21,"Tool"));
+         productArrayList.add(new Product("Thing 12", 9999,"Hardware"));
+         productArrayList.add(new Product("Nails", 25, "Hardware"));
+         productArrayList.add(new Product("Hammer", 35, "Tool"));
+         productArrayList.add(new Product("Saw", 45, "Tool"));
      }
 
     public ArrayList<Product> getProductList() {
-        return productList;
+        return productArrayList;
     }
 }
