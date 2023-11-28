@@ -5,9 +5,9 @@ public class User {
     private String userName;
     private String password;
 
-    public User(int id, String username, String password) {
+    public User(int id, String userName, String password) {
         this.id = id;
-        this.username = username;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -20,18 +20,18 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
     public String getDescription() {
-        return "Id: " + id + ", Username: " + username + ", Password: " + password;
+        return "Id: " + id + ", Username: " + userName + ", Password: " + password;
     }
     public String getCSV () {
-        return id + "," + username + "," + password;
+        return id + "," + userName + "," + password;
     }
 
     public String getPassword() {

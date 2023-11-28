@@ -30,7 +30,7 @@ public class LoginPanel {
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
-                    users.add(new Customer(1, username, password));
+                    users.add(new Customer( username, password, 10000));
                     messageLabel.setText("Successfully registered!");
                     System.out.println(users.get(0).getDescription());
                 }
