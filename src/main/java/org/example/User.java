@@ -2,7 +2,7 @@ package org.example;
 
 public class User {
     private int id;
-    private String username;
+    private String userName;
     private String password;
 
     public User(int id, String username, String password) {
