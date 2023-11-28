@@ -33,4 +33,8 @@ public class User {
     public String getCSV () {
         return id + "," + username + "," + password;
     }
+
+    public String getPassword() {
+        return password;
+    }
 }
