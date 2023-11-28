@@ -18,6 +18,7 @@ public class LoginPanel {
     private String adminUsername = "admin";
     private String adminPassword = "1234";
 
+
     public LoginPanel() {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +43,7 @@ public class LoginPanel {
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     // Admin.
                     if (usernameTextField.getText().equals(adminUsername) && passwordField.getText().equals(adminPassword)) {
-                    // AdminManager adminManager = new AdminManager();
+                        AdminPanel adminPanel = new AdminPanel();
                     }
                     // Customer/Employee.
                     String username = usernameTextField.getText();
@@ -50,12 +51,12 @@ public class LoginPanel {
                     for (User user : users) {
                         if (user instanceof Customer) {
                             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                // CustomerPanel customerPanel = new CustomerPanel();
+                                CustomerPanel customerPanel = new CustomerPanel();
                                 break;
                             }
                         } else if (user instanceof Employee) {
                             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                // EmployeePanel employeePanel = new EmployeePanel();
+                                EmployeePanel employeePanel = new EmployeePanel();
                                 break;
                             }
                         }
