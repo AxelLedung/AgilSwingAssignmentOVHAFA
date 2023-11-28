@@ -9,7 +9,7 @@ public class EmployeePanel {
     private JButton createProduct;
     private JButton editProduct;
     private JButton removeProduct;
-    
+
     public EmployeePanel(JList jProductList, JButton createProduct, JButton editProduct, JButton removeProduct) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
