@@ -6,24 +6,23 @@ public class ProductManager {
     ArrayList<Product> productArrayList = new ArrayList<Product>();
 
      public ProductManager(){
-         productArrayList.add(new Product("Thing 1", 20,"Hardware"));
-         productArrayList.add(new Product("Thing 2", 200,"Hardware"));
-         productArrayList.add(new Product("Thing 3", 12,"Hardware"));
-         productArrayList.add(new Product("Thing 4", 1,"Tool"));
-         productArrayList.add(new Product("Thing 5", 53,"Tool"));
-         productArrayList.add(new Product("Thing 6", 67,"Tool"));
-         productArrayList.add(new Product("Thing 7", 80,"Tool"));
-         productArrayList.add(new Product("Thing 8", 90,"Tool"));
-         productArrayList.add(new Product("Thing 9", 34,"Tool"));
-         productArrayList.add(new Product("Thing 10", 32,"Tool"));
-         productArrayList.add(new Product("Thing 11", 21,"Tool"));
-         productArrayList.add(new Product("Thing 12", 9999,"Hardware"));
-         productArrayList.add(new Product("Nails", 25, "Hardware"));
-         productArrayList.add(new Product("Hammer", 35, "Tool"));
-         productArrayList.add(new Product("Saw", 45, "Tool"));
+         productArrayList.add(new Product("Handdrill", 20,"Tool", 5));
+         productArrayList.add(new Product("Steel", 200,"Hardware", 25));
+         productArrayList.add(new Product("Nuts M12", 12,"Hardware", 3));
+         productArrayList.add(new Product("Drill", 30,"Tool", 5));
+         productArrayList.add(new Product("Screwdriver", 53,"Tool", 2));
+         productArrayList.add(new Product("Socketwrench M8", 67,"Tool", 3));
+         productArrayList.add(new Product("Socketwrench M9", 80,"Tool", 8));
+         productArrayList.add(new Product("Socketwrench M10", 90,"Tool", 9));
+         productArrayList.add(new Product("Socketwrench M11", 34,"Tool", 12));
+         productArrayList.add(new Product("Socketwrench M12", 32,"Tool", 13));
+         productArrayList.add(new Product("Socketwrench M13", 21,"Tool", 13));
+         productArrayList.add(new Product("Sheet Metal", 9999,"Hardware", 13));
+         productArrayList.add(new Product("Nails", 25, "Hardware", 30));
+         productArrayList.add(new Product("Hammer", 35, "Tool", 12));
+         productArrayList.add(new Product("Saw", 45, "Tool", 5));
      }
-
-    public ArrayList<Product> getProductList() {
+    public ArrayList<Product> GetInventory() {
         return productArrayList;
     }
 }

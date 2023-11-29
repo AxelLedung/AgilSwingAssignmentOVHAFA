@@ -1,19 +1,18 @@
 package org.example;
 
 public class Product {
-    int quantity;
     String name;
     int cost;
     String category;
-
-    public Product(String name, int cost, String category) {
+    int quantity;
+    public Product(String name, int cost, String category, int quantity) {
         this.name = name;
         this.cost = cost;
         this.category = category;
+        this.quantity = quantity;
     }
-
     private boolean checkQuantity(int quantity){
-        if(this.quantity < quantity) {
+        if(this.quantity > quantity) {
             this.quantity -= quantity;
             return true;
         }
@@ -21,10 +20,10 @@ public class Product {
             return false;
         }
     }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
     }
     public String GetDescription() {
-        return name + ", " + cost + ", " + category;
+        return name + ", " + cost + ", " + category + ", " + quantity;
     }
 }
