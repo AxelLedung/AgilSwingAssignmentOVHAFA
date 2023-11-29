@@ -44,4 +44,8 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

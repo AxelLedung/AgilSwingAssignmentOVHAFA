@@ -14,9 +14,9 @@ public class CustomerPanel {
     private JList jCheckoutList;
     private DefaultListModel productListModel = new DefaultListModel();
     private DefaultListModel checkoutListModel = new DefaultListModel();
-    private User currentUser;
+    private Customer currentUser;
     public ArrayList<Product> productsToCheckoutArrayList = new ArrayList<Product>();
-    public CustomerPanel(ProductManager productManager, User currentUser) {
+    public CustomerPanel(ProductManager productManager, Customer currentUser) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(500, 500);
