@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class AdminPanel {
-    ArrayList<User> UserList = new ArrayList<>();
+    Admin admin = new Admin();
     private JList list2;
     private JButton AddButton;
     private JTextField Field1;
@@ -29,12 +29,14 @@ public class AdminPanel {
         list2.setModel(listModel);
         list1.setModel(listModel2);
 
-        /*for (Employee n: Employeelist) {
-            listModel.addElement(n.getDescription());
+        for (User user: admin.UserList) {
+            if (user instanceof Employee) {
+                listModel.addElement(user.getDescription());
+            }
         }
-        for (Customer n: CustomerList) {
-            listModel2.addElement(n.getDescription());
-        }*/
+        for (User user: admin.UserList) {
+            listModel2.addElement(user.getDescription());
+        }
 
 
         AddButton.addActionListener(new ActionListener() {
@@ -43,21 +45,22 @@ public class AdminPanel {
                 String Text1 = Field1.getText();
                 String Text2 = Field2.getText();
                 if (!Field1.getText().isEmpty() && !Field2.getText().isEmpty()) {
-                   // Employeelist.add(new Employee(Text1, Text2));
+                    admin.AddEmloyee(Text1, Text2);
                 } else {
                     Field1.setText("");
                     Field2.setText("");
                     Message.setText("Cannot be empty!");
                 }
-                /*Employeelist.add(new Employee(Text1, Text2));
-                for (Employee n: Employeelist){
-                    if (n.getUsername().equals(Text1)) {
-                        listModel.addElement(n.getDescription());
-                        Field1.setText("");
-                        Field2.setText("");
-                        Message.setText("");
+                for (User user: admin.UserList) {
+                    if (user instanceof Employee) {
+                        if (user.getUsername().equals(Text1)) {
+                            listModel.addElement(user.getDescription());
+                            Field1.setText("");
+                            Field2.setText("");
+                            Message.setText("");
+                        }
                     }
-                }*/
+                }
             }
         });
         RemoveButton.addActionListener(new ActionListener() {
@@ -66,7 +69,7 @@ public class AdminPanel {
                 int index = list2.getSelectedIndex();
                 if (index >= 0) {
                     listModel.remove(index);
-                    //Employeelist.remove(index);
+                    admin.RemoveEmployee(index);
                 }
             }
         });
@@ -76,7 +79,7 @@ public class AdminPanel {
                 int index = list2.getSelectedIndex();
                 if (index >= 0) {
                     listModel2.remove(index);
-                    //CustomerList.remove(index);
+                    admin.RemoveCustomer(index);
                 }
             }
         });
