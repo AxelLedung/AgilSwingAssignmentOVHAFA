@@ -14,6 +14,7 @@ public class ReviewPanel extends JFrame {
     private JCheckBox a1CheckBox;
     private JButton submitButton;
     private JTextArea textArea1;
+    private JPanel ReviewPanel1;
 
     public ReviewPanel () {
         setContentPane(ReviewPanel1);
