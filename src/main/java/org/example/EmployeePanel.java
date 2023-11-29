@@ -13,10 +13,17 @@ public class EmployeePanel {
     private JLabel currentEmployeeLabel;
     private JList productsJlist;
     private JButton logoutButton;
-    private String currentEmployee;
+    private JButton confirmChangesButton;
+    private JTextField selctedProductQuantity;
+    private JTextField selectedProductCategory;
+    private JTextField selectedProductCost;
+    private JTextField selectedProductName;
+    private JLabel messageLabel;
+    private Employee currentEmployee;
+    private Product selectedProduct;
     private DefaultListModel productListModel = new DefaultListModel();
 
-    public EmployeePanel(ProductManager productManager, Admin adminm, Employee currentEmployee) {
+    public EmployeePanel(ProductManager productManager, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(600, 600);
@@ -26,7 +33,7 @@ public class EmployeePanel {
         for (int i = 0; i < productManager.productArrayList.size(); i++) {
             productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
         }
-        currentEmployeeLabel.setText("Välkommen "+currentEmployee.getUsername());
+//        currentEmployeeLabel.setText("Welcome "+currentEmployee.getUsername());
         removeProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,13 +45,51 @@ public class EmployeePanel {
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int index = productsJlist.getSelectedIndex();
+                selectedProduct = productManager.productArrayList.get(index);
+                selectedProductName.setText( selectedProduct.getName());
+                selectedProductCost.setText(""+selectedProduct.getCost());
+                selectedProductCategory.setText(selectedProduct.getCategory());
+                selctedProductQuantity.setText(""+ selectedProduct.getQuantity());
+
+            }
+        });
+        confirmChangesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    selectedProduct.setName(selectedProductName.getText());
+                    selectedProduct.setCost(Integer.parseInt(selectedProductCost.getText()));
+                    selectedProduct.setCategory(selectedProductCategory.getText());
+                    selectedProduct.setQuantity(Integer.parseInt(selctedProductQuantity.getText()));
+                    EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
+                    jFrame.setVisible(false);
+                } catch (Exception exception){
+                    messageLabel.setText("Something went wrong, please try again!");
+                }
 
             }
         });
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
 
+                    String newProductName = selectedProductName.getText();
+                    int newProductCost = Integer.parseInt(selectedProductCost.getText());//Maby try catch
+                    String newProductCategory = selectedProductCategory.getText();
+                    int newProductQuantity = Integer.parseInt(selctedProductQuantity.getText());
+                    if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
+                        productManager.productArrayList.add(new Product(newProductName, newProductCost, newProductCategory,newProductQuantity));
+                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
+                        jFrame.setVisible(false);
+                    }else {
+                        messageLabel.setText("Please make sure that you filled all the fields and try again!");
+                    }
+                } catch (Exception exception){
+                    messageLabel.setText("Please type in numbers into Cost/Quantity fields");
+                }
             }
         });
         logoutButton.addActionListener(new ActionListener() {
