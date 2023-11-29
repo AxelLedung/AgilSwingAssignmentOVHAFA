@@ -51,12 +51,12 @@ public class LoginPanel {
                     for (User user : users) {
                         if (user instanceof Customer) {
                             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                CustomerPanel customerPanel = new CustomerPanel();
+                                //CustomerPanel customerPanel = new CustomerPanel();
                                 break;
                             }
                         } else if (user instanceof Employee) {
                             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                EmployeePanel employeePanel = new EmployeePanel();
+                                //EmployeePanel employeePanel = new EmployeePanel();
                                 break;
                             }
                         }

@@ -22,7 +22,7 @@ public class CheckoutWindow {
 
     public CheckoutWindow(String loggedCustomer, ArrayList<Customer> customerList, ArrayList<Product> checkoutList, ArrayList<Product> productList) {
         for(Product p : checkoutList){
-            finalCost += p.getCost();
+         //   finalCost += p.getCost();
         }
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");

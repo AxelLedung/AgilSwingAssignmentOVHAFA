@@ -4,6 +4,7 @@ public class Shop {
     public Shop() {
         ProductManager productManager = new ProductManager();
         Admin admin = new Admin();
-        LoginPanel loginPanel = new LoginPanel(admin, productManager);
+        //LoginPanel loginPanel = new LoginPanel(admin, productManager);
+        EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
     }
 }
