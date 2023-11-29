@@ -11,7 +11,7 @@ public class Product {
         this.category = category;
         this.quantity = quantity;
     }
-    private boolean checkQuantity(int quantity){
+    public boolean checkQuantity(int quantity){
         if(this.quantity > quantity) {
             this.quantity -= quantity;
             return true;
@@ -20,6 +20,23 @@ public class Product {
             return false;
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     public void addQuantity(int quantity) {
         this.quantity += quantity;
     }
