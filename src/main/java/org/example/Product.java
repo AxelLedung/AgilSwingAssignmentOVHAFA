@@ -20,23 +20,6 @@ public class Product {
             return false;
         }
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void addQuantity(int quantity) {
         this.quantity += quantity;
     }
@@ -52,14 +35,12 @@ public class Product {
     public int getCost() {
         return cost;
     }
-
     public void setCost(int cost) {
         this.cost = cost;
     }
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
