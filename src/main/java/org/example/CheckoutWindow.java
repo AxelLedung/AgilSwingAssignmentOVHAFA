@@ -20,7 +20,7 @@ public class CheckoutWindow {
     ArrayList<String> transferList = new ArrayList<>();
 
 
-    public CheckoutWindow(String loggedCustomer, ArrayList<Customer> customerList, ProductManager productManager) {
+    public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList) {
         for(Product p : productsToCheckoutArrayList){
             finalCost += p.getCost();
         }
@@ -36,27 +36,25 @@ public class CheckoutWindow {
         goBackToShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CustomerPanel customerPanel = new CustomerPanel(productManager);
+                CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser);
                 jFrame.dispose();
             }
         });
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(Customer c : customerList) {
-                    for(Product pr : productsToCheckoutArrayList) {
-                        if (c.getBalance() >= finalCost && pr.checkQuantity(pr.quantity)) {
-                            name = loggedCustomer;
-                            for (Product p : productsToCheckoutArrayList) {
-                                transferList.add(p.getName());
-                            }
-                            orderList.add(new Order(name, finalCost, transferList));
-                            c.setBalance(c.getBalance() - finalCost);
-                            jFrame.dispose();
-                        } else {
-                            costLabel.setText("You don't have enough money to finalize the purchase" +
-                                    " or there aren't enough items in stock.");
+                for (Product pr : productsToCheckoutArrayList) {
+                    if (currentUser.getBalance() >= finalCost && pr.checkQuantity(pr.getQuantity())) {
+                        name = currentUser.getUsername();
+                        for (Product p : productsToCheckoutArrayList) {
+                            transferList.add(p.getName());
                         }
+                        orderList.add(new Order(name, finalCost, transferList));
+                        currentUser.setBalance(currentUser.getBalance() - finalCost);
+                        jFrame.dispose();
+                    } else {
+                        costLabel.setText("You don't have enough money to finalize the purchase" +
+                                " or there aren't enough items in stock.");
                     }
                 }
             }

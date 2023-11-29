@@ -51,7 +51,6 @@ public class AdminPanel {
                     Field2.setText("");
                     Message.setText("Cannot be empty!");
                 }
-
                 for (User user: admin.UserList) {
                     if (user instanceof Employee) {
                         if (user.getUsername().equals(Text1)) {
