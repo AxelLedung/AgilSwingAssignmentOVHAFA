@@ -21,7 +21,7 @@ public class CheckoutWindow {
 
 
     public CheckoutWindow(String loggedCustomer, ArrayList<Customer> customerList, ProductManager productManager) {
-        for(Product p : checkoutArrayList){
+        for(Product p : productsToCheckoutArrayList){
             finalCost += p.getCost();
         }
         checkoutJList.setModel(listModel);
@@ -30,7 +30,7 @@ public class CheckoutWindow {
         jFrame.setSize(1000, 1000);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        checkoutListRefresh(checkoutList);
+        checkoutListRefresh(productsToCheckoutArrayList);
         costLabel.setText("Final cost is: " + finalCost + " buckaroos.");
 
         goBackToShopButton.addActionListener(new ActionListener() {
@@ -44,10 +44,10 @@ public class CheckoutWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for(Customer c : customerList) {
-                    for(Product pr : checkArrayList) {
+                    for(Product pr : productsToCheckoutArrayList) {
                         if (c.getBalance() >= finalCost && pr.checkQuantity(pr.quantity)) {
                             name = loggedCustomer;
-                            for (Product p : checkoutArrayList) {
+                            for (Product p : productsToCheckoutArrayList) {
                                 transferList.add(p.getName());
                             }
                             orderList.add(new Order(name, finalCost, transferList));
@@ -62,9 +62,9 @@ public class CheckoutWindow {
             }
         });
     }
-    private void checkoutListRefresh(ArrayList<Product> checkoutArrayList){
+    private void checkoutListRefresh(ArrayList<Product> productsToCheckoutArrayList){
         listModel.removeAllElements();
-        for(Product p : checkoutArrayList){
+        for(Product p : productsToCheckoutArrayList){
             listModel.addElement(p.getName() + "  Cost: " +  p.getCost());
         }
     }

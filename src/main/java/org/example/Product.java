@@ -21,22 +21,6 @@ public class Product {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void addQuantity(int quantity) {
         this.quantity += quantity;
     }
