@@ -14,8 +14,9 @@ public class CustomerPanel {
     private JList jCheckoutList;
     private DefaultListModel productListModel = new DefaultListModel();
     private DefaultListModel checkoutListModel = new DefaultListModel();
+    private User currentUser;
     public ArrayList<Product> productsToCheckoutArrayList = new ArrayList<Product>();
-    public CustomerPanel(ProductManager productManager) {
+    public CustomerPanel(ProductManager productManager, User currentUser) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(500, 500);
@@ -38,7 +39,7 @@ public class CustomerPanel {
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                CheckoutWindow checkoutWindow = new CheckoutWindow(currentUser, productManager, productsToCheckoutArrayList);
                 //Create a checkout window and send: productsToCheckoutArrayList to Checkout Window
             }
         });

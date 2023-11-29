@@ -20,9 +20,11 @@ public class CheckoutWindow {
     ArrayList<String> transferList = new ArrayList<>();
 
 
-    public CheckoutWindow(String loggedCustomer, ArrayList<Customer> customerList, ArrayList<Product> checkoutList, ArrayList<Product> productList) {
-        for(Product p : checkoutList){
-         //   finalCost += p.getCost();
+
+    public CheckoutWindow(String loggedCustomer, ArrayList<Customer> customerList, ProductManager productManager) {
+        for(Product p : checkoutArrayList){
+            finalCost += p.getCost();
+
         }
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
@@ -36,7 +38,7 @@ public class CheckoutWindow {
         goBackToShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ShopWindow shopWindow = new ShopWindow(loggedCustomer, customerList, productList);
+                CustomerPanel customerPanel = new CustomerPanel(productManager);
                 jFrame.dispose();
             }
         });
@@ -44,25 +46,27 @@ public class CheckoutWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for(Customer c : customerList) {
-                    if(c.getBalance() >= finalCost) {
-                        name = loggedCustomer;
-                        for (Product p : checkoutList) {
-                            transferList.add(p.getName());
+                    for(Product pr : checkArrayList) {
+                        if (c.getBalance() >= finalCost && pr.checkQuantity(pr.quantity)) {
+                            name = loggedCustomer;
+                            for (Product p : checkoutArrayList) {
+                                transferList.add(p.getName());
+                            }
+                            orderList.add(new Order(name, finalCost, transferList));
+                            c.setBalance(c.getBalance() - finalCost);
+                            jFrame.dispose();
+                        } else {
+                            costLabel.setText("You don't have enough money to finalize the purchase" +
+                                    " or there aren't enough items in stock.");
                         }
-                        orderList.add(new Order(name, finalCost, transferList));
-                        OrdersTest orders = new OrdersTest(loggedCustomer, customerList, checkoutList, productList, orderList);
-                        jFrame.dispose();
-                    }
-                    else{
-                        costLabel.setText("You don't have enough money to finalize the purchase.");
                     }
                 }
             }
         });
     }
-    private void checkoutListRefresh(ArrayList<Product> checkoutList){
+    private void checkoutListRefresh(ArrayList<Product> checkoutArrayList){
         listModel.removeAllElements();
-        for(Product p : checkoutList){
+        for(Product p : checkoutArrayList){
             listModel.addElement(p.getName() + "  Cost: " +  p.getCost());
         }
     }
