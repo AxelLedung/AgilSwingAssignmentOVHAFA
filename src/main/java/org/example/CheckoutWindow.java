@@ -57,6 +57,8 @@ public class CheckoutWindow {
                     }
                     orderList.add(new Order(name, finalCost, transferList));
                     currentUser.setBalance(currentUser.getBalance() - finalCost);
+                    CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
+                    jFrame.dispose();
                 }
                 else {
                     costLabel.setText("You don't have enough money to finalize the purchase" +

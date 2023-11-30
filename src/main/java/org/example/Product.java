@@ -13,7 +13,7 @@ public class Product {
         this.quantity = quantity;
     }
     public boolean checkQuantity(int quantity){
-        if(this.quantity > quantity) {
+        if(this.quantity > 0) {
             this.quantity--;
             return true;
         }
