@@ -39,7 +39,7 @@ public class ReviewPanel extends JFrame {
         CustomerPanelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              CustomerPanel customerPanel = new CustomerPanel();
+              CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser);
                 jFrame.setVisible(false);
             }
         });
@@ -78,11 +78,8 @@ public class ReviewPanel extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ReviewPanel reviewPanel = new ReviewPanel();
-            reviewPanel.setVisible(true);
-        });
-    }
+
+
+
 }
 
