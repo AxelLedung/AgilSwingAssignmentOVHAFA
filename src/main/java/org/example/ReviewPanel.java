@@ -19,18 +19,28 @@ public class ReviewPanel extends JFrame {
     private JCheckBox a1CheckBox;
     private JCheckBox a5CheckBox;
     private JLabel rvLabel2;
+    private JButton CustomerPanelButton;
 
-    public ReviewPanel() {
-        setContentPane(Panel1);
-        setTitle("ReviewPanel");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 500);
-        setLocationRelativeTo(null);
+    public ReviewPanel(ProductManager productManager, Customer currentUser) {
+        JFrame jFrame = new JFrame();
+        jFrame.setContentPane(Panel1);
+        jFrame.setTitle("ReviewPanel");
+        jFrame. setDefaultCloseOperation(EXIT_ON_CLOSE);
+        jFrame.setSize(500, 500);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
 
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveToFile();
+            }
+        });
+        CustomerPanelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              CustomerPanel customerPanel = new CustomerPanel();
+                jFrame.setVisible(false);
             }
         });
     }
