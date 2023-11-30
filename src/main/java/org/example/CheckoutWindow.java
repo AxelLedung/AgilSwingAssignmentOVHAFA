@@ -25,9 +25,6 @@ public class CheckoutWindow {
 
 
     public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList) {
-        for(Product p : productsToCheckoutArrayList){
-            finalCost += p.getCost();
-        }
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
         jFrame.setContentPane(checkoutWindow);
@@ -35,7 +32,6 @@ public class CheckoutWindow {
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         checkoutListRefresh(productsToCheckoutArrayList);
-        costLabel.setText("Final cost is: " + finalCost + " buckaroos.");
         userLabel.setText("Current user: " + currentUser.getUsername());
 
         goBackToShopButton.addActionListener(new ActionListener() {
@@ -48,19 +44,23 @@ public class CheckoutWindow {
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean purchased = false;
                 for (Product pr : productsToCheckoutArrayList) {
                     if (currentUser.getBalance() >= finalCost && pr.checkQuantity(pr.getQuantity())) {
-                        name = currentUser.getUsername();
-                        for (Product p : productsToCheckoutArrayList) {
-                            transferList.add(p.getName());
-                        }
-                        orderList.add(new Order(name, finalCost, transferList));
-                        currentUser.setBalance(currentUser.getBalance() - finalCost);
-                        jFrame.dispose();
-                    } else {
-                        costLabel.setText("You don't have enough money to finalize the purchase" +
-                                " or there aren't enough items in stock.");
+                       purchased = true;
                     }
+                }
+                if(purchased){
+                    name = currentUser.getUsername();
+                    for (Product p : productsToCheckoutArrayList) {
+                        transferList.add(p.getName());
+                    }
+                    orderList.add(new Order(name, finalCost, transferList));
+                    currentUser.setBalance(currentUser.getBalance() - finalCost);
+                }
+                else {
+                    costLabel.setText("You don't have enough money to finalize the purchase" +
+                            " or there aren't enough items in stock.");
                 }
             }
         });
@@ -83,6 +83,11 @@ public class CheckoutWindow {
         });
     }
     private void checkoutListRefresh(ArrayList<Product> productsToCheckoutArrayList){
+        finalCost = 0;
+        for(Product p : productsToCheckoutArrayList){
+            finalCost += p.getCost();
+        }
+        costLabel.setText("Final cost is: " + finalCost + " buckaroos.");
         listModel.removeAllElements();
         for(Product p : productsToCheckoutArrayList){
             listModel.addElement(p.getName() + "  Cost: " +  p.getCost());
