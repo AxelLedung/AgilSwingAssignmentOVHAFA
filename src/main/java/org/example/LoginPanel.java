@@ -33,6 +33,10 @@ public class LoginPanel {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
                     admin.AddCustomer(username, password, 500);
+                    for (int i = 0; i < admin.UserList.size(); i++) {
+                        System.out.println(admin.UserList.get(i).getDescription());
+                    }
+
                     messageLabel.setText("Successfully registered!");
                 }
             }
@@ -44,6 +48,9 @@ public class LoginPanel {
                     // Admin.
                     if (usernameTextField.getText().equals(adminUsername) && passwordField.getText().equals(adminPassword)) {
                         AdminPanel adminPanel = new AdminPanel();
+                        usernameTextField.setText("");
+                        passwordField.setText("");
+                        jFrame.setVisible(false);
                     }
                     // Customer/Employee.
                     String username = usernameTextField.getText();
@@ -53,13 +60,18 @@ public class LoginPanel {
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                             if (user instanceof Customer) { // If it's a customer.
                                 CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user);
+                                usernameTextField.setText("");
+                                passwordField.setText("");
+                                jFrame.setVisible(false);
                                 break;
                             } else if (user instanceof Employee) { // If it's an employee.
-                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin, (Employee) user);
+                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
+                                usernameTextField.setText("");
+                                passwordField.setText("");
+                                jFrame.setVisible(false);
                                 break;
                             }
                         }
-                        break;
                     }
                 } else {
                     messageLabel.setText("Wrong credentials.");
