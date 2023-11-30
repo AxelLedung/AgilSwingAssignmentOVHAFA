@@ -27,14 +27,15 @@ public class AdminPanel {
 
         list2.setModel(listModel);
         list1.setModel(listModel2);
-
         for (User user: admin.UserList) {
             if (user instanceof Employee) {
                 listModel.addElement(user.getDescription());
             }
         }
         for (User user: admin.UserList) {
-            listModel2.addElement(user.getDescription());
+            if (user instanceof Customer) {
+                listModel2.addElement(user.getDescription());
+            }
         }
 
 
