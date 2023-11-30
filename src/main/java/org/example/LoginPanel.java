@@ -14,9 +14,10 @@ public class LoginPanel {
     private JLabel usernameLabel;
     private JLabel passwordLabel;
     private JLabel messageLabel;
-    private ArrayList<User> users = new ArrayList<>();
     private String adminUsername = "admin";
     private String adminPassword = "1234";
+    Admin admin = new Admin();
+    ProductManager productManager = new ProductManager();
 
 
     public LoginPanel() {
@@ -31,9 +32,8 @@ public class LoginPanel {
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
-                    users.add(new Customer( username, password, 10000));
+                    admin.AddCustomer(username, password, 500);
                     messageLabel.setText("Successfully registered!");
-                    System.out.println(users.get(0).getDescription());
                 }
             }
         });
@@ -48,18 +48,18 @@ public class LoginPanel {
                     // Customer/Employee.
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
-                    for (User user : users) {
-                        if (user instanceof Customer) {
-                            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                //CustomerPanel customerPanel = new CustomerPanel();
+
+                    for (User user : admin.UserList) {
+                        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                            if (user instanceof Customer) { // If it's a customer.
+                                CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user);
                                 break;
-                            }
-                        } else if (user instanceof Employee) {
-                            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                //EmployeePanel employeePanel = new EmployeePanel();
+                            } else if (user instanceof Employee) { // If it's an employee.
+                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin, (Employee) user);
                                 break;
                             }
                         }
+                        break;
                     }
                 } else {
                     messageLabel.setText("Wrong credentials.");

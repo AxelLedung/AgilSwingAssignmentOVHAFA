@@ -24,7 +24,7 @@ public class Product {
         this.quantity += quantity;
     }
     public String GetDescription() {
-        return name + ", " + cost + ", " + category + ", " + quantity;
+        return name + ", " + category + ", Cost: " + cost;
     }
     public String getName() {
         return name;

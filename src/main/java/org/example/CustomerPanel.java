@@ -20,7 +20,7 @@ public class CustomerPanel {
     public CustomerPanel(ProductManager productManager, Customer currentUser) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.setSize(500, 500);
+        jFrame.setSize(1000, 1000);
         jFrame.setContentPane(jPanel);
         jFrame.setVisible(true);
         jProductList.setModel(productListModel);
@@ -34,14 +34,14 @@ public class CustomerPanel {
             public void actionPerformed(ActionEvent e) {
                 //Back to Login screen
                 LoginPanel loginPanel = new LoginPanel();
-                jFrame.setVisible(false);
+                jFrame.dispose();
             }
         });
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CheckoutWindow checkoutWindow = new CheckoutWindow(currentUser, productManager, productsToCheckoutArrayList);
-                //Create a checkout window and send: productsToCheckoutArrayList to Checkout Window
+                jFrame.dispose();
             }
         });
         addProductButton.addActionListener(new ActionListener() {
@@ -58,7 +58,7 @@ public class CustomerPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ReviewPanel reviewPanel = new ReviewPanel();
-                jFrame.setVisible(false);
+                jFrame.dispose();
             }
         });
     }
