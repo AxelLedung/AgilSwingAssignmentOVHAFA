@@ -57,7 +57,7 @@ public class CustomerPanel {
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ReviewPanel reviewPanel = new ReviewPanel();
+                ReviewPanel reviewPanel = new ReviewPanel(productManager, currentUser);
                 jFrame.dispose();
             }
         });
