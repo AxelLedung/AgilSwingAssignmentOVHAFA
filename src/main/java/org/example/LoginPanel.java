@@ -14,12 +14,10 @@ public class LoginPanel {
     private JLabel usernameLabel;
     private JLabel passwordLabel;
     private JLabel messageLabel;
-    private ArrayList<User> users = new ArrayList<>();
     private String adminUsername = "admin";
     private String adminPassword = "1234";
 
-
-    public LoginPanel() {
+    public LoginPanel(ProductManager productManager, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(500, 200);
@@ -31,9 +29,12 @@ public class LoginPanel {
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
-                    users.add(new Customer( username, password, 10000));
+                    admin.AddCustomer(username, password, 500);
+                    for (int i = 0; i < admin.UserList.size(); i++) {
+                        System.out.println(admin.UserList.get(i).getDescription());
+                    }
+
                     messageLabel.setText("Successfully registered!");
-                    System.out.println(users.get(0).getDescription());
                 }
             }
         });
@@ -43,20 +44,24 @@ public class LoginPanel {
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     // Admin.
                     if (usernameTextField.getText().equals(adminUsername) && passwordField.getText().equals(adminPassword)) {
-                        AdminPanel adminPanel = new AdminPanel();
+                        AdminPanel adminPanel = new AdminPanel(admin, productManager);
+                        usernameTextField.setText("");
+                        passwordField.setText("");
+                        jFrame.dispose();
                     }
                     // Customer/Employee.
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
-                    for (User user : users) {
-                        if (user instanceof Customer) {
-                            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                //CustomerPanel customerPanel = new CustomerPanel();
+
+                    for (User user : admin.UserList) {
+                        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                            if (user instanceof Customer) { // If it's a customer.
+                                CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user, admin);
+                                jFrame.dispose();
                                 break;
-                            }
-                        } else if (user instanceof Employee) {
-                            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                                //EmployeePanel employeePanel = new EmployeePanel();
+                            } else if (user instanceof Employee) { // If it's an employee.
+                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
+                                jFrame.dispose();
                                 break;
                             }
                         }

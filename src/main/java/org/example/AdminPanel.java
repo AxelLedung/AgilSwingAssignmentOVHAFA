@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AdminPanel {
-    Admin admin = new Admin();
     private JList list2;
     private JButton AddButton;
     private JTextField Field1;
@@ -19,14 +18,14 @@ public class AdminPanel {
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel<>();
     JFrame jframe = new JFrame();
-    public AdminPanel(){
+    public AdminPanel(Admin admin, ProductManager productManager){
         jframe.setSize(800,500);
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setContentPane(AdminPanel);
-
         list2.setModel(listModel);
         list1.setModel(listModel2);
+
         for (User user: admin.UserList) {
             if (user instanceof Employee) {
                 listModel.addElement(user.getDescription());
@@ -37,8 +36,6 @@ public class AdminPanel {
                 listModel2.addElement(user.getDescription());
             }
         }
-
-
         AddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,10 +83,9 @@ public class AdminPanel {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginPanel loginpanel = new LoginPanel();
+                LoginPanel loginpanel = new LoginPanel(productManager, admin);
                 jframe.dispose();
             }
         });
     }
-
 }

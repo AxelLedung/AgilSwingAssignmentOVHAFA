@@ -5,6 +5,7 @@ public class Product {
     private int cost;
     private String category;
     private int quantity;
+
     public Product(String name, int cost, String category, int quantity) {
         this.name = name;
         this.cost = cost;
@@ -12,8 +13,8 @@ public class Product {
         this.quantity = quantity;
     }
     public boolean checkQuantity(int quantity){
-        if(this.quantity > quantity) {
-            this.quantity -= quantity;
+        if(this.quantity > 0) {
+            this.quantity--;
             return true;
         }
         else{
@@ -24,7 +25,7 @@ public class Product {
         this.quantity += quantity;
     }
     public String GetDescription() {
-        return name + ", " + cost + ", " + category + ", " + quantity;
+        return name + ", " + category + ", Cost: " + cost;
     }
     public String getName() {
         return name;
