@@ -14,7 +14,9 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <model/>
+        </properties>
       </component>
       <component id="437b2" class="javax.swing.JList" binding="list1">
         <constraints>
@@ -24,12 +26,12 @@
         </constraints>
         <properties/>
       </component>
-      <component id="b62ad" class="javax.swing.JButton" binding="RemoveButton">
+      <component id="b62ad" class="javax.swing.JButton" binding="removeCbutton">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Remove Employee"/>
+          <text value="Remove Customer"/>
         </properties>
       </component>
       <component id="aaf8e" class="javax.swing.JButton" binding="AddButton">
@@ -38,14 +40,6 @@
         </constraints>
         <properties>
           <text value="Add Employee"/>
-        </properties>
-      </component>
-      <component id="cdecb" class="javax.swing.JButton" binding="removeCbutton">
-        <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Remove Customer"/>
         </properties>
       </component>
       <component id="11563" class="javax.swing.JLabel">
@@ -85,7 +79,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Employee list"/>
+          <text value="Customer list"/>
         </properties>
       </component>
       <component id="e1a9f" class="javax.swing.JLabel">
@@ -93,7 +87,7 @@
           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Customer list"/>
+          <text value="Employee list"/>
         </properties>
       </component>
       <component id="c45f2" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
@@ -110,6 +104,14 @@
         </constraints>
         <properties>
           <text value=""/>
+        </properties>
+      </component>
+      <component id="cdecb" class="javax.swing.JButton" binding="RemoveButton">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Remove Employee"/>
         </properties>
       </component>
     </children>

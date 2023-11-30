@@ -3,7 +3,6 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class AdminPanel {
     Admin admin = new Admin();
@@ -21,7 +20,7 @@ public class AdminPanel {
     private DefaultListModel listModel2 = new DefaultListModel<>();
     JFrame jframe = new JFrame();
     public AdminPanel(){
-        jframe.setSize(500,500);
+        jframe.setSize(800,500);
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setContentPane(AdminPanel);
@@ -86,7 +85,8 @@ public class AdminPanel {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                LoginPanel loginpanel = new LoginPanel();
+                jframe.dispose();
             }
         });
     }
