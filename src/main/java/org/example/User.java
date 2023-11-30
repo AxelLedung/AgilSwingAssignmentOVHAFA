@@ -10,30 +10,24 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getUsername() {
         return userName;
     }
-
     public void setUsername(String userName) {
         this.userName = userName;
     }
-
     public String getDescription() {
         return "Id: " + id + ", Username: " + userName + ", Password: " + password;
     }
     public String getCSV () {
         return id + "," + userName + "," + password;
     }
-
     public String getPassword() {
         return password;
     }

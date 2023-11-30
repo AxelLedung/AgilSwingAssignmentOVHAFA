@@ -17,7 +17,6 @@ public class LoginPanel {
     private String adminUsername = "admin";
     private String adminPassword = "1234";
 
-
     public LoginPanel(ProductManager productManager, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

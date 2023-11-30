@@ -7,6 +7,4 @@ public class Employee extends User{
         super(nextEmployeeId, userName, password);
         nextEmployeeId++;
     }
-
-
 }

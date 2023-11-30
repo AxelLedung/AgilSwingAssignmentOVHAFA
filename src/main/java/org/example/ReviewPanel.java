@@ -29,7 +29,6 @@ public class ReviewPanel extends JFrame {
         jFrame.setSize(500, 500);
         jFrame.setLocationRelativeTo(null);
         jFrame.setVisible(true);
-
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +43,6 @@ public class ReviewPanel extends JFrame {
             }
         });
     }
-
     private void saveToFile() {
         JFileChooser fileChooser = new JFileChooser();
 
@@ -52,7 +50,6 @@ public class ReviewPanel extends JFrame {
 
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile, true))) {
                 writer.write("Product: " + textField1.getText() + "\n");
                 writer.write("Review: ");
@@ -71,15 +68,10 @@ public class ReviewPanel extends JFrame {
             }
         }
     }
-
     private void appendCheckBoxState(BufferedWriter writer, JCheckBox checkBox) throws IOException {
         if (checkBox.isSelected()) {
             writer.write(checkBox.getText() + " ");
         }
     }
-
-
-
-
 }
 

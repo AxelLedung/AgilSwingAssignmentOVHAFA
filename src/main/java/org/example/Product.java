@@ -5,6 +5,7 @@ public class Product {
     private int cost;
     private String category;
     private int quantity;
+
     public Product(String name, int cost, String category, int quantity) {
         this.name = name;
         this.cost = cost;

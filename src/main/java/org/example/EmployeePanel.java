@@ -51,14 +51,12 @@ public class EmployeePanel {
                 selectedProductCost.setText(""+selectedProduct.getCost());
                 selectedProductCategory.setText(selectedProduct.getCategory());
                 selctedProductQuantity.setText(""+ selectedProduct.getQuantity());
-
             }
         });
         confirmChangesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
                     selectedProduct.setName(selectedProductName.getText());
                     selectedProduct.setCost(Integer.parseInt(selectedProductCost.getText()));
                     selectedProduct.setCategory(selectedProductCategory.getText());
@@ -68,14 +66,12 @@ public class EmployeePanel {
                 } catch (Exception exception){
                     messageLabel.setText("Something went wrong, please try again!");
                 }
-
             }
         });
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
                     String newProductName = selectedProductName.getText();
                     int newProductCost = Integer.parseInt(selectedProductCost.getText());//Maby try catch
                     String newProductCategory = selectedProductCategory.getText();
@@ -97,7 +93,6 @@ public class EmployeePanel {
             public void actionPerformed(ActionEvent e) {
                 LoginPanel loginPanel = new LoginPanel(productManager, admin);
                 jFrame.setVisible(false);
-
             }
         });
     }
