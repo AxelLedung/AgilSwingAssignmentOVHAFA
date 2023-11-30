@@ -15,6 +15,7 @@ public class CheckoutWindow {
     private JLabel costLabel;
     private JButton logOutButton;
     private JLabel userLabel;
+    private JButton removeFromCartButton;
     DefaultListModel listModel = new DefaultListModel<>();
     private String name;
     int finalCost;
@@ -68,6 +69,16 @@ public class CheckoutWindow {
             public void actionPerformed(ActionEvent e) {
                 LoginPanel loginPanel = new LoginPanel();
                 jFrame.dispose();
+            }
+        });
+        removeFromCartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int removeIndex = checkoutJList.getSelectedIndex();
+                if(removeIndex > -1){
+                    productsToCheckoutArrayList.remove(removeIndex);
+                    checkoutListRefresh(productsToCheckoutArrayList);
+                }
             }
         });
     }
