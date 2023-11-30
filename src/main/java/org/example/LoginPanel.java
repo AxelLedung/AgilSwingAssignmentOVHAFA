@@ -52,10 +52,10 @@ public class LoginPanel {
                     for (User user : admin.UserList) {
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                             if (user instanceof Customer) { // If it's a customer.
-                                CustomerPanel customerPanel = new CustomerPanel(productManager, user);
+                                CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user);
                                 break;
                             } else if (user instanceof Employee) { // If it's an employee.
-                                EmployeePanel employeePanel = new EmployeePanel(user);
+                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin, (Employee) user);
                                 break;
                             }
                         }
