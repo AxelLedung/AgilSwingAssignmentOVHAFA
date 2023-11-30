@@ -12,6 +12,7 @@ public class CustomerPanel {
     private JButton backButton;
     private JButton addProductButton;
     private JList jCheckoutList;
+    private JButton reviewButton;
     private DefaultListModel productListModel = new DefaultListModel();
     private DefaultListModel checkoutListModel = new DefaultListModel();
     private Customer currentUser;
@@ -51,6 +52,13 @@ public class CustomerPanel {
                     productsToCheckoutArrayList.add(productManager.productArrayList.get(index));
                     checkoutListModel.addElement(productManager.productArrayList.get(index).GetDescription());
                 }
+            }
+        });
+        reviewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ReviewPanel reviewPanel = new ReviewPanel();
+                jFrame.setVisible(false);
             }
         });
     }

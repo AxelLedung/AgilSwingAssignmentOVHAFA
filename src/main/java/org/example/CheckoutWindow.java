@@ -22,6 +22,7 @@ public class CheckoutWindow {
     ArrayList<String> transferList = new ArrayList<>();
 
 
+
     public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList) {
         for(Product p : productsToCheckoutArrayList){
             finalCost += p.getCost();
