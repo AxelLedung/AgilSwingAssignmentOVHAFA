@@ -8,6 +8,9 @@ public class Admin {
         UserList.add(new Employee("Kent", "1234"));
         UserList.add(new Employee("Freddie", "1234"));
         UserList.add(new Employee("Gunvald", "1234"));
+        UserList.add(new Customer("Ingvar","1234",50000));
+        UserList.add(new Customer("Ulla","1234",35000));
+        UserList.add(new Customer("Sven","1234",123));
     }
 
     public void AddCustomer(String username, String password, int balance){
