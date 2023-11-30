@@ -95,7 +95,7 @@ public class EmployeePanel {
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginPanel loginPanel = new LoginPanel();
+                LoginPanel loginPanel = new LoginPanel(productManager, admin);
                 jFrame.setVisible(false);
 
             }

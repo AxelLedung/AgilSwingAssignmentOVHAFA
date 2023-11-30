@@ -16,11 +16,9 @@ public class LoginPanel {
     private JLabel messageLabel;
     private String adminUsername = "admin";
     private String adminPassword = "1234";
-    Admin admin = new Admin();
-    ProductManager productManager = new ProductManager();
 
 
-    public LoginPanel() {
+    public LoginPanel(ProductManager productManager, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(500, 200);
@@ -47,10 +45,10 @@ public class LoginPanel {
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     // Admin.
                     if (usernameTextField.getText().equals(adminUsername) && passwordField.getText().equals(adminPassword)) {
-                        AdminPanel adminPanel = new AdminPanel();
+                        AdminPanel adminPanel = new AdminPanel(admin, productManager);
                         usernameTextField.setText("");
                         passwordField.setText("");
-                        jFrame.setVisible(false);
+                        jFrame.dispose();
                     }
                     // Customer/Employee.
                     String username = usernameTextField.getText();
@@ -59,16 +57,12 @@ public class LoginPanel {
                     for (User user : admin.UserList) {
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                             if (user instanceof Customer) { // If it's a customer.
-                                CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user);
-                                usernameTextField.setText("");
-                                passwordField.setText("");
-                                jFrame.setVisible(false);
+                                CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user, admin);
+                                jFrame.dispose();
                                 break;
                             } else if (user instanceof Employee) { // If it's an employee.
                                 EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
-                                usernameTextField.setText("");
-                                passwordField.setText("");
-                                jFrame.setVisible(false);
+                                jFrame.dispose();
                                 break;
                             }
                         }

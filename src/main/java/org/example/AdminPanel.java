@@ -19,7 +19,7 @@ public class AdminPanel {
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel<>();
     JFrame jframe = new JFrame();
-    public AdminPanel(){
+    public AdminPanel(Admin admin, ProductManager productManager){
         jframe.setSize(800,500);
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -86,7 +86,7 @@ public class AdminPanel {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginPanel loginpanel = new LoginPanel();
+                LoginPanel loginpanel = new LoginPanel(productManager, admin);
                 jframe.dispose();
             }
         });

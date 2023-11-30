@@ -24,7 +24,7 @@ public class CheckoutWindow {
 
 
 
-    public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList) {
+    public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList, Admin admin) {
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
         jFrame.setContentPane(checkoutWindow);
@@ -37,7 +37,7 @@ public class CheckoutWindow {
         goBackToShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser);
+                CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
                 jFrame.dispose();
             }
         });
@@ -67,7 +67,7 @@ public class CheckoutWindow {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginPanel loginPanel = new LoginPanel();
+                LoginPanel loginPanel = new LoginPanel(productManager, admin);
                 jFrame.dispose();
             }
         });

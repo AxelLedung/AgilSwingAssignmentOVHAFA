@@ -21,7 +21,7 @@ public class ReviewPanel extends JFrame {
     private JLabel rvLabel2;
     private JButton CustomerPanelButton;
 
-    public ReviewPanel(ProductManager productManager, Customer currentUser) {
+    public ReviewPanel(ProductManager productManager, Customer currentUser, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setContentPane(Panel1);
         jFrame.setTitle("ReviewPanel");
@@ -39,7 +39,7 @@ public class ReviewPanel extends JFrame {
         CustomerPanelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser);
+              CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
                 jFrame.setVisible(false);
             }
         });

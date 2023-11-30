@@ -13,11 +13,15 @@ public class CustomerPanel {
     private JButton addProductButton;
     private JList jCheckoutList;
     private JButton reviewButton;
+    private JTextArea jReviewText;
+    private JLabel jCategoryLabel;
+    private JLabel jCostLabel;
+    private JLabel jNameLabel;
     private DefaultListModel productListModel = new DefaultListModel();
     private DefaultListModel checkoutListModel = new DefaultListModel();
     private Customer currentUser;
     public ArrayList<Product> productsToCheckoutArrayList = new ArrayList<Product>();
-    public CustomerPanel(ProductManager productManager, Customer currentUser) {
+    public CustomerPanel(ProductManager productManager, Customer currentUser, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(1000, 1000);
@@ -32,15 +36,14 @@ public class CustomerPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Back to Login screen
-                LoginPanel loginPanel = new LoginPanel();
+                LoginPanel loginPanel = new LoginPanel(productManager, admin);
                 jFrame.dispose();
             }
         });
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CheckoutWindow checkoutWindow = new CheckoutWindow(currentUser, productManager, productsToCheckoutArrayList);
+                CheckoutWindow checkoutWindow = new CheckoutWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
                 jFrame.dispose();
             }
         });
@@ -57,10 +60,9 @@ public class CustomerPanel {
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ReviewPanel reviewPanel = new ReviewPanel(productManager, currentUser);
+                ReviewPanel reviewPanel = new ReviewPanel(productManager, currentUser, admin);
                 jFrame.dispose();
             }
         });
     }
-
 }
