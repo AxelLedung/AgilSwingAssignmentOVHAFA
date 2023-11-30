@@ -48,6 +48,7 @@ public class LoginPanel {
                     // Customer/Employee.
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
+
                     for (User user : admin.UserList) {
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                             if (user instanceof Customer) { // If it's a customer.

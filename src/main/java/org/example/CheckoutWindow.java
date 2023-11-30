@@ -13,6 +13,8 @@ public class CheckoutWindow {
     private JButton makePurchaseButton;
     private JButton goBackToShopButton;
     private JLabel costLabel;
+    private JButton logOutButton;
+    private JLabel userLabel;
     DefaultListModel listModel = new DefaultListModel<>();
     private String name;
     int finalCost;
@@ -20,8 +22,9 @@ public class CheckoutWindow {
     ArrayList<String> transferList = new ArrayList<>();
 
 
-    public CheckoutWindow(String loggedCustomer, ArrayList<Customer> customerList, ArrayList<Product> checkoutList, ArrayList<Product> productList) {
-        for(Product p : checkoutList){
+
+    public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList) {
+        for(Product p : productsToCheckoutArrayList){
             finalCost += p.getCost();
         }
         checkoutJList.setModel(listModel);
@@ -30,39 +33,47 @@ public class CheckoutWindow {
         jFrame.setSize(1000, 1000);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        checkoutListRefresh(checkoutList);
+        checkoutListRefresh(productsToCheckoutArrayList);
         costLabel.setText("Final cost is: " + finalCost + " buckaroos.");
+        userLabel.setText("Current user: " + currentUser.getUsername());
 
         goBackToShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ShopWindow shopWindow = new ShopWindow(loggedCustomer, customerList, productList);
+                CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser);
                 jFrame.dispose();
             }
         });
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(Customer c : customerList) {
-                    if(c.getBalance() >= finalCost) {
-                        name = loggedCustomer;
-                        for (Product p : checkoutList) {
+                for (Product pr : productsToCheckoutArrayList) {
+                    if (currentUser.getBalance() >= finalCost && pr.checkQuantity(pr.getQuantity())) {
+                        name = currentUser.getUsername();
+                        for (Product p : productsToCheckoutArrayList) {
                             transferList.add(p.getName());
                         }
                         orderList.add(new Order(name, finalCost, transferList));
-                        OrdersTest orders = new OrdersTest(loggedCustomer, customerList, checkoutList, productList, orderList);
+                        currentUser.setBalance(currentUser.getBalance() - finalCost);
                         jFrame.dispose();
-                    }
-                    else{
-                        costLabel.setText("You don't have enough money to finalize the purchase.");
+                    } else {
+                        costLabel.setText("You don't have enough money to finalize the purchase" +
+                                " or there aren't enough items in stock.");
                     }
                 }
             }
         });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginPanel loginPanel = new LoginPanel();
+                jFrame.dispose();
+            }
+        });
     }
-    private void checkoutListRefresh(ArrayList<Product> checkoutList){
+    private void checkoutListRefresh(ArrayList<Product> productsToCheckoutArrayList){
         listModel.removeAllElements();
-        for(Product p : checkoutList){
+        for(Product p : productsToCheckoutArrayList){
             listModel.addElement(p.getName() + "  Cost: " +  p.getCost());
         }
     }
