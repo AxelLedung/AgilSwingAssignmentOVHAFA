@@ -13,6 +13,8 @@ public class CheckoutWindow {
     private JButton makePurchaseButton;
     private JButton goBackToShopButton;
     private JLabel costLabel;
+    private JButton logOutButton;
+    private JLabel userLabel;
     DefaultListModel listModel = new DefaultListModel<>();
     private String name;
     int finalCost;
@@ -32,6 +34,7 @@ public class CheckoutWindow {
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         checkoutListRefresh(productsToCheckoutArrayList);
         costLabel.setText("Final cost is: " + finalCost + " buckaroos.");
+        userLabel.setText("Current user: " + currentUser.getUsername());
 
         goBackToShopButton.addActionListener(new ActionListener() {
             @Override
@@ -57,6 +60,13 @@ public class CheckoutWindow {
                                 " or there aren't enough items in stock.");
                     }
                 }
+            }
+        });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginPanel loginPanel = new LoginPanel();
+                jFrame.dispose();
             }
         });
     }
