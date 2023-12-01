@@ -26,15 +26,11 @@ public class AdminPanel {
         list2.setModel(listModel);
         list1.setModel(listModel2);
 
-        for (User user: admin.UserList) {
-            if (user instanceof Employee) {
+        for (Employee user: admin.EmployeeList) {
                 listModel.addElement(user.getDescription());
-            }
         }
-        for (User user: admin.UserList) {
-            if (user instanceof Customer) {
+        for (Customer user: admin.CustomerList) {
                 listModel2.addElement(user.getDescription());
-            }
         }
         AddButton.addActionListener(new ActionListener() {
             @Override
@@ -48,7 +44,7 @@ public class AdminPanel {
                     Field2.setText("");
                     Message.setText("Cannot be empty!");
                 }
-                for (User user: admin.UserList) {
+                for (User user: admin.CustomerList) {
                     if (user instanceof Employee) {
                         if (user.getUsername().equals(Text1)) {
                             listModel.addElement(user.getDescription());

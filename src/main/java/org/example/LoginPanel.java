@@ -3,7 +3,6 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class LoginPanel {
     private JPanel panel1;
@@ -37,6 +36,7 @@ public class LoginPanel {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean found = false;
                 if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                     // Admin.
                     if (usernameTextField.getText().equals(adminUsername) && passwordField.getText().equals(adminPassword)) {
@@ -48,21 +48,22 @@ public class LoginPanel {
                     // Customer/Employee.
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
-
-                    for (User user : admin.UserList) {
+                    for (Customer user : admin.CustomerList) {
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                            if (user instanceof Customer) { // If it's a customer.
-                                CustomerPanel customerPanel = new CustomerPanel(productManager, (Customer) user, admin);
-                                jFrame.dispose();
-                                break;
-                            } else if (user instanceof Employee) { // If it's an employee.
-                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin, (Employee) user);
-                                jFrame.dispose();
-                                break;
-                            }
+                            CustomerPanel customerPanel = new CustomerPanel(productManager, user, admin);
+                            found = true;
+                            jFrame.dispose();
                         }
                     }
-                } else {
+                    for (Employee emp : admin.EmployeeList) {
+                        if (emp.getUsername().equals(username) && emp.getPassword().equals(password)) {
+                            EmployeePanel employeePanel = new EmployeePanel(productManager, admin, emp);
+                            found = true;
+                            jFrame.dispose();
+                        }
+                    }
+                }
+                if(!found) {
                     messageLabel.setText("Wrong credentials.");
                 }
             }
