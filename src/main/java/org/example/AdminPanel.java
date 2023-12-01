@@ -44,14 +44,12 @@ public class AdminPanel {
                     Field2.setText("");
                     Message.setText("Cannot be empty!");
                 }
-                for (User user: admin.CustomerList) {
-                    if (user instanceof Employee) {
+                for (Employee user: admin.EmployeeList) {
                         if (user.getUsername().equals(Text1)) {
                             listModel.addElement(user.getDescription());
                             Field1.setText("");
                             Field2.setText("");
                             Message.setText("");
-                        }
                     }
                 }
             }
