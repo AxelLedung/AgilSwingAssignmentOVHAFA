@@ -1,10 +1,13 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Product {
     private String name;
     private int cost;
     private String category;
     private int quantity;
+    private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
     public Product(String name, int cost, String category, int quantity) {
         this.name = name;
