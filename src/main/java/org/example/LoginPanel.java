@@ -30,10 +30,6 @@ public class LoginPanel {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
                     admin.AddCustomer(username, password, 500);
-                    for (int i = 0; i < admin.UserList.size(); i++) {
-                        System.out.println(admin.UserList.get(i).getDescription());
-                    }
-
                     messageLabel.setText("Successfully registered!");
                 }
             }
@@ -60,7 +56,7 @@ public class LoginPanel {
                                 jFrame.dispose();
                                 break;
                             } else if (user instanceof Employee) { // If it's an employee.
-                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
+                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin, (Employee) user);
                                 jFrame.dispose();
                                 break;
                             }
