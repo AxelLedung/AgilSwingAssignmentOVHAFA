@@ -73,7 +73,7 @@ public class AdminPanel {
         removeCbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = list2.getSelectedIndex();
+                int index = list1.getSelectedIndex();
                 if (index >= 0) {
                     listModel2.remove(index);
                     admin.RemoveCustomer(index);
