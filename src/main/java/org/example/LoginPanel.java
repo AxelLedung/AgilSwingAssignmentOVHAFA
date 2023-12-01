@@ -60,7 +60,7 @@ public class LoginPanel {
                                 jFrame.dispose();
                                 break;
                             } else if (user instanceof Employee) { // If it's an employee.
-                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin,(Employee) user);
+                                EmployeePanel employeePanel = new EmployeePanel(productManager, admin);
                                 jFrame.dispose();
                                 break;
                             }

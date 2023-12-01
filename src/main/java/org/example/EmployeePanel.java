@@ -24,7 +24,7 @@ public class EmployeePanel {
     private DefaultListModel productListModel = new DefaultListModel();
 
 
-    public EmployeePanel(ProductManager productManager, Admin admin, Employee currentEmployee) {
+    public EmployeePanel(ProductManager productManager, Admin admin/*,Employee currentEmployee*/) {
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(600, 600);
@@ -34,7 +34,7 @@ public class EmployeePanel {
         for (int i = 0; i < productManager.productArrayList.size(); i++) {
             productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
         }
-        currentEmployeeLabel.setText("Welcome "+currentEmployee.getUsername());
+//        currentEmployeeLabel.setText("Welcome "+currentEmployee.getUsername());
         removeProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +62,7 @@ public class EmployeePanel {
                     selectedProduct.setCost(Integer.parseInt(selectedProductCost.getText()));
                     selectedProduct.setCategory(selectedProductCategory.getText());
                     selectedProduct.setQuantity(Integer.parseInt(selctedProductQuantity.getText()));
-                    EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
+                    EmployeePanel employeePanel = new EmployeePanel(productManager, admin/*, currentEmployee*/);
                     jFrame.setVisible(false);
                 } catch (Exception exception){
                     messageLabel.setText("Something went wrong, please try again!");
@@ -79,7 +79,7 @@ public class EmployeePanel {
                     int newProductQuantity = Integer.parseInt(selctedProductQuantity.getText());
                     if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
                         productManager.productArrayList.add(new Product(newProductName, newProductCost, newProductCategory,newProductQuantity));
-                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
+                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin/*, currentEmployee*/);
                         jFrame.setVisible(false);
                     }else {
                         messageLabel.setText("Please make sure that you filled all the fields and try again!");
