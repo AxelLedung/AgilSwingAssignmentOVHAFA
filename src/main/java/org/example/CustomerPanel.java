@@ -1,8 +1,7 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class CustomerPanel {
@@ -62,6 +61,23 @@ public class CustomerPanel {
             public void actionPerformed(ActionEvent e) {
                 ReviewPanel reviewPanel = new ReviewPanel(productManager, currentUser, admin);
                 jFrame.dispose();
+            }
+        });
+
+        jProductList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int index = jProductList.getSelectedIndex();
+                jNameLabel.setText(productManager.productArrayList.get(index).getName());
+                jCategoryLabel.setText(productManager.productArrayList.get(index).getCategory());
+                jCostLabel.setText(Integer.toString(productManager.productArrayList.get(index).getCost()));
+                String reviewString = "";
+                for (Review r : productManager.productArrayList.get(index).getReviewArrayList()) {
+
+                    reviewString = reviewString + "\n\r" + r.getCustomer().getUsername() + " tycker:" + "\n\r" + r.getText();
+                }
+                jReviewText.setText(reviewString);
             }
         });
     }
