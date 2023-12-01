@@ -54,4 +54,10 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    public ArrayList<Review> getReviewArrayList() {
+        return reviewArrayList;
+    }
+    public void setReviewArrayList(ArrayList<Review> reviewArrayList) {
+        this.reviewArrayList = reviewArrayList;
+    }
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ReviewPanel extends JFrame {
     private JButton submitButton;
     private JTextArea textArea1;
-    private JTextField textField1;
+    private JList jProductList;
     private JPanel Panel1;
     private JCheckBox a4CheckBox;
     private JCheckBox a3CheckBox;
@@ -20,7 +20,7 @@ public class ReviewPanel extends JFrame {
     private JCheckBox a5CheckBox;
     private JLabel rvLabel2;
     private JButton CustomerPanelButton;
-
+    private DefaultListModel productListModel = new DefaultListModel();
     public ReviewPanel(ProductManager productManager, Customer currentUser, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setContentPane(Panel1);
@@ -29,10 +29,17 @@ public class ReviewPanel extends JFrame {
         jFrame.setSize(500, 500);
         jFrame.setLocationRelativeTo(null);
         jFrame.setVisible(true);
+        jProductList.setModel(productListModel);
+        for (int i = 0; i < productManager.productArrayList.size(); i++) {
+            productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
+        }
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveToFile();
+                int index = jProductList.getSelectedIndex();
+                if (index >= 0) {
+                    productManager.productArrayList.get(index).getReviewArrayList().add(new Review(textArea1.getText()));
+                }
             }
         });
         CustomerPanelButton.addActionListener(new ActionListener() {
@@ -43,7 +50,7 @@ public class ReviewPanel extends JFrame {
             }
         });
     }
-    private void saveToFile() {
+    /*private void saveToFile() {
         JFileChooser fileChooser = new JFileChooser();
 
         int result = fileChooser.showSaveDialog(this);
@@ -51,7 +58,7 @@ public class ReviewPanel extends JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile, true))) {
-                writer.write("Product: " + textField1.getText() + "\n");
+                writer.write("Product: " + jProductList.getText() + "\n");
                 writer.write("Review: ");
                 writer.write(textArea1.getText() + "\n");
                 writer.write("Rating: ");
@@ -67,7 +74,7 @@ public class ReviewPanel extends JFrame {
                 JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
+    }*/
     private void appendCheckBoxState(BufferedWriter writer, JCheckBox checkBox) throws IOException {
         if (checkBox.isSelected()) {
             writer.write(checkBox.getText() + " ");
