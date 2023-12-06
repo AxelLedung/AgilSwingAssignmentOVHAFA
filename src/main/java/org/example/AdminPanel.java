@@ -3,8 +3,11 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AdminPanel {
+    ProductManager productManager = new ProductManager();
     private JList list2;
     private JButton AddButton;
     private JTextField Field1;
@@ -15,16 +18,24 @@ public class AdminPanel {
     private JList list1;
     private JButton logOutButton;
     private JLabel Message;
+    private JList list3Products;
+    private JTextField Field3Discount;
+    private JButton DiscountButton;
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel<>();
+    private DefaultListModel listmodel3 = new DefaultListModel();
     JFrame jframe = new JFrame();
     public AdminPanel(Admin admin, ProductManager productManager){
-        jframe.setSize(800,500);
-        jframe.setVisible(true);
+        jframe.setSize(1000,500);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setContentPane(AdminPanel);
         list2.setModel(listModel);
         list1.setModel(listModel2);
+        list3Products.setModel(listmodel3);
+        //JScrollPane scrollPaneList1 = new JScrollPane(list1);
+        //scrollPaneList1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        //ScrollpaneCustomers.setViewportView(scrollPaneList1);
+        jframe.setVisible(true);
 
         for (Employee user: admin.EmployeeList) {
                 listModel.addElement(user.getDescription());
@@ -32,6 +43,11 @@ public class AdminPanel {
         for (Customer user: admin.CustomerList) {
                 listModel2.addElement(user.getDescription());
         }
+        for (Product product: productManager.productArrayList){
+            listmodel3.addElement(product.getName() + "  " + product.getCost());
+        }
+
+
         AddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,6 +95,51 @@ public class AdminPanel {
             public void actionPerformed(ActionEvent e) {
                 LoginPanel loginpanel = new LoginPanel(productManager, admin);
                 jframe.dispose();
+            }
+        });
+        DiscountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int discount = Integer.parseInt(Field3Discount.getText());
+                int index = list3Products.getSelectedIndex();
+
+            }
+        });
+        Field1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    AddButton.doClick();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+            }
+        });
+
+        Field2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    AddButton.doClick();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
             }
         });
     }
