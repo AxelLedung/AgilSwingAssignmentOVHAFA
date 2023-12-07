@@ -38,55 +38,26 @@ public class EmployeePanel {
         removeProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            int index = productsJlist.getSelectedIndex();
-                productManager.productArrayList.remove(index);
-                productListModel.removeElementAt(index);
+
             }
         });
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = productsJlist.getSelectedIndex();
-                selectedProduct = productManager.productArrayList.get(index);
-                selectedProductName.setText( selectedProduct.getName());
-                selectedProductCost.setText(""+selectedProduct.getCost());
-                selectedProductCategory.setText(selectedProduct.getCategory());
-                selctedProductQuantity.setText(""+ selectedProduct.getQuantity());
+
             }
         });
         confirmChangesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    selectedProduct.setName(selectedProductName.getText());
-                    selectedProduct.setCost(Integer.parseInt(selectedProductCost.getText()));
-                    selectedProduct.setCategory(selectedProductCategory.getText());
-                    selectedProduct.setQuantity(Integer.parseInt(selctedProductQuantity.getText()));
-                    EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
-                    jFrame.setVisible(false);
-                } catch (Exception exception){
-                    messageLabel.setText("Something went wrong, please try again!");
-                }
+
+
             }
         });
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    String newProductName = selectedProductName.getText();
-                    int newProductCost = Integer.parseInt(selectedProductCost.getText());//Maby try catch
-                    String newProductCategory = selectedProductCategory.getText();
-                    int newProductQuantity = Integer.parseInt(selctedProductQuantity.getText());
-                    if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
-                        productManager.productArrayList.add(new Product(newProductName, newProductCost, newProductCategory,newProductQuantity));
-                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
-                        jFrame.setVisible(false);
-                    }else {
-                        messageLabel.setText("Please make sure that you filled all the fields and try again!");
-                    }
-                } catch (Exception exception){
-                    messageLabel.setText("Please type in numbers into Cost/Quantity fields");
-                }
+               AddProductWindow addProductWindow=new AddProductWindow(productManager);
             }
         });
         logoutButton.addActionListener(new ActionListener() {
