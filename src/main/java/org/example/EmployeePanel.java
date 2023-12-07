@@ -44,7 +44,7 @@ public class EmployeePanel {
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                EditProduct editProduct = new EditProduct(productManager);
             }
         });
         confirmChangesButton.addActionListener(new ActionListener() {

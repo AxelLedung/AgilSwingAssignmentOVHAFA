@@ -15,15 +15,18 @@ public class EditProduct {
     private JCheckBox confirmCheckBox;
     private JPanel editPanel;
     private JButton applyEditingsButton;
+    private JButton cancelButton;
+    private JLabel messageLabel;
+    private JPanel mainPanel;
     private DefaultListModel productListModel = new DefaultListModel();
     private Product selectedProduct;
 
     public EditProduct(ProductManager productManager){
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        jFrame.setSize(600, 800);
+        jFrame.setSize(700, 800);
         jFrame.setLocation(60, 60);
-        jFrame.setContentPane(editPanel);
+        jFrame.setContentPane(mainPanel);
         jFrame.setVisible(true);
         productJlist.setModel(productListModel);;
         for (int i = 0; i < productManager.productArrayList.size(); i++) {
@@ -32,7 +35,7 @@ public class EditProduct {
         deletProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (confirmCheckBox.isFocusPainted()){
+                if (confirmCheckBox.isSelected()){
                     int index = productJlist.getSelectedIndex();
                     productManager.productArrayList.remove(index);
                     productListModel.removeElementAt(index);
@@ -61,7 +64,15 @@ public class EditProduct {
                         selectedProduct.setQuantity(Integer.parseInt(productQuantityField.getText()));
 //                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
                         //Save()....VÄNTAR PÅ AXEL.
-                        jFrame.setVisible(false);
+                        messageLabel.setText(productNameField.getText()+" has been edited successfully!");
+                        //Inte säker hur man uppdaterar JListen.
+                        //Här ska confirmCheckBox bli tom igen
+                        productNameField.setText("");
+                        productPriceField.setText("");
+                        productCategoryField.setText("");
+                        productQuantityField.setText("");
+                        
+
 
                     } catch (Exception exception){
                         Error error = new Error("Wrong input", "Please insert correct input type!");
@@ -70,6 +81,12 @@ public class EditProduct {
                 } else {
                     Error error = new Error("Empty fields!", "Please make sure that all fields are filled!");
                 }
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.setVisible(false);
             }
         });
     }
