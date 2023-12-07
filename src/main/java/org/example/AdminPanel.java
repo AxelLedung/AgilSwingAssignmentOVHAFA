@@ -21,6 +21,7 @@ public class AdminPanel {
     private JList list3Products;
     private JTextField Field3Discount;
     private JButton DiscountButton;
+    private JLabel discountMessage;
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel<>();
     private DefaultListModel listmodel3 = new DefaultListModel();
@@ -97,11 +98,48 @@ public class AdminPanel {
                 jframe.dispose();
             }
         });
+
+
+        // Gjorde en discount funktion som ändrar priset i produktlistan
+        // Vi kanske skulle behöva en label i shop fönstret som säger vilka produkter som har rabatter
         DiscountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int discount = Integer.parseInt(Field3Discount.getText());
-                int index = list3Products.getSelectedIndex();
+                double price;
+                int currentprice;
+                try {
+                    double discount = Integer.parseInt(Field3Discount.getText());
+                    if (discount > 0 && discount <= 100) {
+                        try {
+                            discountMessage.setText("");
+                            int index = list3Products.getSelectedIndex();
+                            Product selectedProduct = (Product) productManager.productArrayList.get(index);
+                            for (Product product : productManager.productArrayList) {
+                                if (selectedProduct.equals(product)) {
+                                    currentprice = product.getCost();
+                                    double procent = discount / 100;
+                                    price = currentprice - (currentprice * procent);
+                                    long roundprice = Math.round(price);
+                                    int sendprice = (int) roundprice;
+                                    product.setCost(sendprice);
+                                    discountMessage.setText(product.getName() + " now has " + Math.round(discount) + "% discount");
+                                    Field3Discount.setText("");
+                                }
+                            }
+                        } catch (Exception i) {
+                            discountMessage.setText("Please select a product...");
+                            Field3Discount.setText("");
+                        }
+                    } else {
+                        discountMessage.setText("Please enter a value between 0-100...");
+                        Field3Discount.setText("");
+                    }
+                }
+                catch (NumberFormatException n){
+                    discountMessage.setText("Please type a value");
+                    }
+
+
 
             }
         });
