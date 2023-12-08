@@ -1,0 +1,7 @@
+Kent,1234
+Freddie,1234
+Gunvald,1234
+@
+Ingvar,1234,3000
+Ulla,1234,3000
+Sven,1234,3000

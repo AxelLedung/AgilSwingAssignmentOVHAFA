@@ -78,7 +78,7 @@ public class EmployeePanel {
                     String newProductCategory = selectedProductCategory.getText();
                     int newProductQuantity = Integer.parseInt(selctedProductQuantity.getText());
                     if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
-                        productManager.productArrayList.add(new Product(newProductName, newProductCost, newProductCategory,newProductQuantity));
+                        productManager.productArrayList.add(new Product(newProductName, newProductCategory, newProductCost, newProductQuantity));
                         EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
                         jFrame.setVisible(false);
                     }else {

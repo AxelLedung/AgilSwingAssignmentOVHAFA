@@ -10,6 +10,9 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
+    public String GetCSV() {
+        return id + "," + userName + "," + password;
+    }
     public int getId() {
         return id;
     }

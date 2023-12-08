@@ -9,11 +9,14 @@ public class Product {
     private int quantity;
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
-    public Product(String name, int cost, String category, int quantity) {
+    public Product(String name, String category, int cost, int quantity) {
         this.name = name;
-        this.cost = cost;
         this.category = category;
+        this.cost = cost;
         this.quantity = quantity;
+    }
+    public String GetCSV() {
+        return name + "," + category + "," + cost + "," + quantity;
     }
     public boolean checkQuantity(int quantity){
         if(this.quantity > 0) {
