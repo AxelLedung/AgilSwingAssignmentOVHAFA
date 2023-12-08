@@ -28,17 +28,6 @@ public class Shop {
         }
         LoginPanel loginPanel = new LoginPanel(productManager, admin);
     }
-    //Temporary function to see if Employee and Customer ArrayList is formatted correctly
-    public static void DisplayUserLists(Admin admin) {
-        System.out.println("EmployeeArrayList:");
-        for (Employee e : admin.EmployeeList) {
-            System.out.println(e.getUsername());
-        }
-        System.out.println("CustomerArrayList:");
-        for (Customer c : admin.CustomerList) {
-            System.out.println(c.getUsername());
-        }
-    }
     public static boolean Save(ProductManager productManager, Admin admin) {
         SaveUsers(admin);
         Load(productManager, admin);
@@ -74,7 +63,6 @@ public class Shop {
     }
     public static boolean SaveUsers(Admin admin) {
         try {
-            DisplayUserLists(admin);
             FileWriter fileWriter = new FileWriter(usersSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < admin.EmployeeList.size(); i++) {
