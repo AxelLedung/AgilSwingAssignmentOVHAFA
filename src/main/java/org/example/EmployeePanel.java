@@ -53,7 +53,6 @@ public class EmployeePanel {
                 selectedProductCost.setText(""+selectedProduct.getCost());
                 selectedProductCategory.setText(selectedProduct.getCategory());
                 selctedProductQuantity.setText(""+ selectedProduct.getQuantity());
-                Shop.Save(productManager, admin);
             }
         });
         confirmChangesButton.addActionListener(new ActionListener() {
@@ -64,6 +63,7 @@ public class EmployeePanel {
                     selectedProduct.setCost(Integer.parseInt(selectedProductCost.getText()));
                     selectedProduct.setCategory(selectedProductCategory.getText());
                     selectedProduct.setQuantity(Integer.parseInt(selctedProductQuantity.getText()));
+                    Shop.Save(productManager, admin);
                     EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
                     jFrame.setVisible(false);
                 } catch (Exception exception){
