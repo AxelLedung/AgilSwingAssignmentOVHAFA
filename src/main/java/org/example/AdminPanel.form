@@ -81,7 +81,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="eba6c" class="javax.swing.JLabel">
         <constraints>
@@ -214,6 +216,14 @@
         <border type="none"/>
         <children/>
       </grid>
+      <component id="c97f8" class="javax.swing.JLabel" binding="discountMessage">
+        <constraints>
+          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
