@@ -71,7 +71,7 @@ public class EditProduct {
                         productPriceField.setText("");
                         productCategoryField.setText("");
                         productQuantityField.setText("");
-                        
+
 
 
                     } catch (Exception exception){
