@@ -11,7 +11,7 @@ public class User {
         this.password = password;
     }
     public String GetCSV() {
-        return id + "," + userName + "," + password;
+        return userName + "," + password;
     }
     public int getId() {
         return id;

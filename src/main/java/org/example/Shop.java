@@ -1,5 +1,6 @@
 package org.example;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,20 +14,38 @@ public class Shop {
     Admin admin = new Admin();
     public Shop() {
         Load(productManager, admin);
+        System.out.println("ProductArrayList:");
         for (Product p : productManager.productArrayList) {
             System.out.println(p.getName());
         }
-        for (Customer c : admin.CustomerList) {
-            System.out.println(c.getUsername());
-        }
+        System.out.println("EmployeeArrayList:");
         for (Employee e : admin.EmployeeList) {
             System.out.println(e.getUsername());
         }
+        System.out.println("CustomerArrayList:");
+        for (Customer c : admin.CustomerList) {
+            System.out.println(c.getUsername());
+        }
         LoginPanel loginPanel = new LoginPanel(productManager, admin);
     }
+    //Temporary function to see if Employee and Customer ArrayList is formatted correctly
+    public static void DisplayUserLists(Admin admin) {
+        System.out.println("EmployeeArrayList:");
+        for (Employee e : admin.EmployeeList) {
+            System.out.println(e.getUsername());
+        }
+        System.out.println("CustomerArrayList:");
+        for (Customer c : admin.CustomerList) {
+            System.out.println(c.getUsername());
+        }
+    }
     public static boolean Save(ProductManager productManager, Admin admin) {
-        SaveProducts(productManager);
+        SaveUsers(admin);
         Load(productManager, admin);
+        return true;
+    }
+    public static boolean Load(ProductManager productManager, Admin admin) {
+        LoadUsers(admin);
         return true;
     }
     public static boolean SaveProducts(ProductManager productManager) {
@@ -55,6 +74,7 @@ public class Shop {
     }
     public static boolean SaveUsers(Admin admin) {
         try {
+            DisplayUserLists(admin);
             FileWriter fileWriter = new FileWriter(usersSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < admin.EmployeeList.size(); i++) {
@@ -76,12 +96,12 @@ public class Shop {
             }
             bufferedWriter.close();
             System.out.println("Saved succesfully!");
-            //load function
+            LoadUsers(admin);
             return true;
         }
         catch (Exception e) {
             System.out.println("Save failed...");
-            //load funtion
+            LoadUsers(admin);
             return false;
         }
     }
@@ -89,11 +109,6 @@ public class Shop {
         return true;
     }
     public static boolean SaveOrders(ProductManager productManager) {
-        return true;
-    }
-    public static boolean Load(ProductManager productManager, Admin admin) {
-        LoadProducts(productManager);
-
         return true;
     }
     private static boolean LoadProducts(ProductManager productManager) {
@@ -125,27 +140,28 @@ public class Shop {
             String line = bufferedReader.readLine();
             admin.EmployeeList.clear();
             admin.CustomerList.clear();
+            boolean customers = false;
             while (line != null) {
-                boolean customers = false;
-                if (line == "@") {
+                if (line.equals("@")) {
                     customers = true;
                     line = bufferedReader.readLine();
                 }
-                if(!customers) {
-                    String[] variables = line.split(",");
-                    int id = Integer.parseInt(variables[0]);
-                    String userName = variables[1];
-                    String password = variables[2];
-                    admin.EmployeeList.add(new Employee(userName, password));
-                    line = bufferedReader.readLine();
-                }
                 else {
-                    String[] variables = line.split(",");
-                    String userName = variables[0];
-                    String password = variables[1];
-                    int balance = Integer.parseInt(variables[2]);
-                    admin.CustomerList.add(new Customer(userName, password, balance));
-                    line = bufferedReader.readLine();
+                    if(!customers) {
+                        String[] variables = line.split(",");
+                        String userName = variables[0];
+                        String password = variables[1];
+                        admin.EmployeeList.add(new Employee(userName, password));
+                        line = bufferedReader.readLine();
+                    }
+                    else {
+                        String[] variables = line.split(",");
+                        String userName = variables[0];
+                        String password = variables[1];
+                        int balance = Integer.parseInt(variables[2]);
+                        admin.CustomerList.add(new Customer(userName, password, balance));
+                        line = bufferedReader.readLine();
+                    }
                 }
             }
             return true;
