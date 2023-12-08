@@ -39,6 +39,7 @@ public class ReviewPanel extends JFrame {
                 int index = jProductList.getSelectedIndex();
                 if (index >= 0) {
                     productManager.productArrayList.get(index).getReviewArrayList().add(new Review(textArea1.getText(), currentUser));
+                    Shop.Save(productManager, admin);
                 }
             }
         });

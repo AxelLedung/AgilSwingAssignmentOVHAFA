@@ -41,6 +41,7 @@ public class EmployeePanel {
             int index = productsJlist.getSelectedIndex();
                 productManager.productArrayList.remove(index);
                 productListModel.removeElementAt(index);
+                Shop.Save(productManager, admin);
             }
         });
         editProductButton.addActionListener(new ActionListener() {
@@ -52,6 +53,7 @@ public class EmployeePanel {
                 selectedProductCost.setText(""+selectedProduct.getCost());
                 selectedProductCategory.setText(selectedProduct.getCategory());
                 selctedProductQuantity.setText(""+ selectedProduct.getQuantity());
+                Shop.Save(productManager, admin);
             }
         });
         confirmChangesButton.addActionListener(new ActionListener() {
@@ -80,6 +82,7 @@ public class EmployeePanel {
                     if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
                         productManager.productArrayList.add(new Product(newProductName, newProductCategory, newProductCost, newProductQuantity));
                         EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
+                        Shop.Save(productManager, admin);
                         jFrame.setVisible(false);
                     }else {
                         messageLabel.setText("Please make sure that you filled all the fields and try again!");

@@ -12,8 +12,17 @@ public class Shop {
     ProductManager productManager = new ProductManager();
     Admin admin = new Admin();
     public Shop() {
+        Load(productManager, admin);
+        for (Product p : productManager.productArrayList) {
+            System.out.println(p.getName());
+        }
+        for (Customer c : admin.CustomerList) {
+            System.out.println(c.getUsername());
+        }
+        for (Employee e : admin.EmployeeList) {
+            System.out.println(e.getUsername());
+        }
         LoginPanel loginPanel = new LoginPanel(productManager, admin);
-        Save(productManager, admin);
     }
     public static boolean Save(ProductManager productManager, Admin admin) {
         Load(productManager, admin);
@@ -22,6 +31,9 @@ public class Shop {
     }
     public static boolean SaveProducts(ProductManager productManager) {
         try {
+            for (Product p : productManager.productArrayList) {
+                System.out.println(p.getName());
+            }
             FileWriter fileWriter = new FileWriter(productsSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < productManager.productArrayList.size(); i++) {
@@ -32,12 +44,12 @@ public class Shop {
             }
             bufferedWriter.close();
             System.out.println("Saved succesfully!");
-            //load function
+            LoadProducts(productManager);
             return true;
         }
         catch (Exception e) {
             System.out.println("Save failed...");
-            //load funtion
+            LoadProducts(productManager);
             return false;
         }
     }
@@ -73,14 +85,15 @@ public class Shop {
             return false;
         }
     }
-    public static boolean SaveReviews() {
+    public static boolean SaveReviews(ProductManager productManager) {
         return true;
     }
-    public static boolean SaveOrders() {
+    public static boolean SaveOrders(ProductManager productManager) {
         return true;
     }
     public static boolean Load(ProductManager productManager, Admin admin) {
         LoadProducts(productManager);
+
         return true;
     }
     private static boolean LoadProducts(ProductManager productManager) {

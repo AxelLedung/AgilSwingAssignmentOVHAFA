@@ -29,6 +29,7 @@ public class LoginPanel {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
                     admin.AddCustomer(username, password, 500);
+                    Shop.Save(productManager, admin);
                     messageLabel.setText("Successfully registered!");
                 }
             }

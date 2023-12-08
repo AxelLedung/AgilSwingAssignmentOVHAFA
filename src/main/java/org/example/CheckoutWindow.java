@@ -57,6 +57,7 @@ public class CheckoutWindow {
                     }
                     orderList.add(new Order(name, finalCost, transferList));
                     currentUser.setBalance(currentUser.getBalance() - finalCost);
+                    Shop.Save(productManager, admin);
                     CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
                     jFrame.dispose();
                 }

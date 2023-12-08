@@ -56,6 +56,7 @@ public class AdminPanel {
                 String Text2 = Field2.getText();
                 if (!Field1.getText().isEmpty() && !Field2.getText().isEmpty()) {
                     admin.AddEmloyee(Text1, Text2);
+                    Shop.Save(productManager, admin);
                 } else {
                     Field1.setText("");
                     Field2.setText("");
@@ -78,6 +79,7 @@ public class AdminPanel {
                 if (index >= 0) {
                     listModel.remove(index);
                     admin.RemoveEmployee(index);
+                    Shop.Save(productManager, admin);
                 }
             }
         });
@@ -88,6 +90,7 @@ public class AdminPanel {
                 if (index >= 0) {
                     listModel2.remove(index);
                     admin.RemoveCustomer(index);
+                    Shop.Save(productManager, admin);
                 }
             }
         });

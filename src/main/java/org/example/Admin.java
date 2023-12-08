@@ -6,6 +6,7 @@ public class Admin {
     ArrayList<Employee> EmployeeList = new ArrayList<>();
     ArrayList<Customer> CustomerList = new ArrayList<>();
     public Admin(){
+        EmployeeList.add(new Employee("kent", "1234"));
     }
     public void AddCustomer(String username, String password, int balance){
         CustomerList.add(new Customer(username, password, balance));
