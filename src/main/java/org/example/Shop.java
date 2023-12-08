@@ -25,8 +25,8 @@ public class Shop {
         LoginPanel loginPanel = new LoginPanel(productManager, admin);
     }
     public static boolean Save(ProductManager productManager, Admin admin) {
-        Load(productManager, admin);
         SaveProducts(productManager);
+        Load(productManager, admin);
         return true;
     }
     public static boolean SaveProducts(ProductManager productManager) {

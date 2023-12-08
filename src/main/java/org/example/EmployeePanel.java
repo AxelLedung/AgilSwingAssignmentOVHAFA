@@ -80,8 +80,10 @@ public class EmployeePanel {
                     String newProductCategory = selectedProductCategory.getText();
                     int newProductQuantity = Integer.parseInt(selctedProductQuantity.getText());
                     if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
+                        System.out.println("#1" + productManager.productArrayList);
                         productManager.productArrayList.add(new Product(newProductName, newProductCategory, newProductCost, newProductQuantity));
                         EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
+                        System.out.println("#2" + productManager.productArrayList);
                         Shop.Save(productManager, admin);
                         jFrame.setVisible(false);
                     }else {
