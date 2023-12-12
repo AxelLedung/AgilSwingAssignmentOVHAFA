@@ -17,8 +17,21 @@ public class Order {
         this.orderList = orderList;
     }
 
+    public String getDescription(){
+        String bracketLess = orderList.toString().replace("[","").replace("]","");
+        return id + ", " + customerName + ", " + orderSum + ", " + bracketLess;
+    }
+
     public String getCustomerName() {
         return customerName;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public int getSum(){
+        return orderSum;
     }
 
     public void setCustomerName(String customerName) {
@@ -35,6 +48,10 @@ public class Order {
 
     public ArrayList<String> getOrderList() {
         return orderList;
+    }
+
+    public String getOrderItem(ArrayList<String> listItem) {
+        return listItem.toString();
     }
 
     public void setOrderList(ArrayList<String> orderList) {

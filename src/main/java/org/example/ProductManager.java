@@ -3,7 +3,9 @@ package org.example;
 import java.util.ArrayList;
 
 public class ProductManager {
-    ArrayList<Product> productArrayList = new ArrayList<Product>();
+    ArrayList<Product> productArrayList = new ArrayList<>();
+    ArrayList<Order> orderList = new ArrayList<>();
+    ArrayList<Order> refundList = new ArrayList<>();
 
      public ProductManager(){
          productArrayList.add(new Product("Handdrill", 20,"Tool", 5));
@@ -24,5 +26,8 @@ public class ProductManager {
      }
     public ArrayList<Product> GetInventory() {
         return productArrayList;
+    }
+    public ArrayList<Order> getOrders(){
+         return orderList;
     }
 }

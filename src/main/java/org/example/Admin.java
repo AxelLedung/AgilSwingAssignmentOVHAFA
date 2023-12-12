@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Admin {
     ArrayList<Employee> EmployeeList = new ArrayList<>();
     ArrayList<Customer> CustomerList = new ArrayList<>();
+    ArrayList<Card> CardList = new ArrayList<>();
     public Admin(){
         EmployeeList.add(new Employee("Kent", "1234"));
         EmployeeList.add(new Employee("Freddie", "1234"));
