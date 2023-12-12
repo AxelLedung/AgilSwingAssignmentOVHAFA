@@ -9,39 +9,27 @@ public class Shop {
     private static File productsSaveFile = new File("products-save.txt");
     private static File usersSaveFile = new File("users-save.txt");
     private static File reviewsSaveFile = new File("reviews-save.txt");
+    private static File categorySaveFile = new File("category-save.txt");
     private static File ordersSaveFile = new File("orders-save.txt");
     ProductManager productManager = new ProductManager();
     Admin admin = new Admin();
     public Shop() {
         Load(productManager, admin);
-        System.out.println("ProductArrayList:");
-        for (Product p : productManager.productArrayList) {
-            System.out.println(p.getName());
-        }
-        System.out.println("EmployeeArrayList:");
-        for (Employee e : admin.EmployeeList) {
-            System.out.println(e.getUsername());
-        }
-        System.out.println("CustomerArrayList:");
-        for (Customer c : admin.CustomerList) {
-            System.out.println(c.getUsername());
-        }
         LoginPanel loginPanel = new LoginPanel(productManager, admin);
     }
     public static boolean Save(ProductManager productManager, Admin admin) {
         SaveUsers(admin);
+        SaveProducts(productManager);
         Load(productManager, admin);
         return true;
     }
     public static boolean Load(ProductManager productManager, Admin admin) {
         LoadUsers(admin);
+        LoadProducts(productManager);
         return true;
     }
     public static boolean SaveProducts(ProductManager productManager) {
         try {
-            for (Product p : productManager.productArrayList) {
-                System.out.println(p.getName());
-            }
             FileWriter fileWriter = new FileWriter(productsSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < productManager.productArrayList.size(); i++) {
@@ -58,6 +46,48 @@ public class Shop {
         catch (Exception e) {
             System.out.println("Save failed...");
             LoadProducts(productManager);
+            return false;
+        }
+    }
+    public static boolean SaveCategories(ProductManager productManager) {
+        try {
+            FileWriter fileWriter = new FileWriter(categorySaveFile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (int i = 0; i < productManager.categoryArrayList.size(); i++) {
+                bufferedWriter.write(productManager.categoryArrayList.get(i).getName());
+                if (i < productManager.categoryArrayList.size() - 1) {
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.close();
+            System.out.println("Saved succesfully!");
+            LoadCategories(productManager);
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("Save failed...");
+            LoadCategories(productManager);
+            return false;
+        }
+    }
+    public static boolean SaveOrders(ProductManager productManager) {
+        try {
+            FileWriter fileWriter = new FileWriter(ordersSaveFile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (int i = 0; i < productManager.orderArrayList.size(); i++) {
+                bufferedWriter.write(productManager.orderArrayList.get(i).GetCSV());
+                if (i < productManager.orderArrayList.size() - 1) {
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.close();
+            System.out.println("Saved succesfully!");
+            LoadOrders(productManager);
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("Save failed...");
+            LoadOrders(productManager);
             return false;
         }
     }
@@ -96,9 +126,6 @@ public class Shop {
     public static boolean SaveReviews(ProductManager productManager) {
         return true;
     }
-    public static boolean SaveOrders(ProductManager productManager) {
-        return true;
-    }
     private static boolean LoadProducts(ProductManager productManager) {
         try {
             FileReader fileReader = new FileReader(productsSaveFile);
@@ -111,7 +138,21 @@ public class Shop {
                 String productCategory = variables[1];
                 int productCost = Integer.parseInt(variables[2]);
                 int quantity = Integer.parseInt(variables[3]);
-                productManager.productArrayList.add(new Product(productName, productCategory, productCost, quantity));
+                Category category;
+                Category categoryFound = null;
+                for (Category c : productManager.categoryArrayList) {
+                    if (c.getName().equals(productCategory) && categoryFound == null) {
+                        categoryFound = c;
+                    }
+                }
+                if (categoryFound == null) {
+                    category = new Category(productCategory);
+                }
+                else {
+                    category = categoryFound;
+                }
+                productManager.categoryArrayList.add(category);
+                productManager.productArrayList.add(new Product(productName, category, productCost, quantity));
                 line = bufferedReader.readLine();
             }
             return true;
@@ -151,6 +192,47 @@ public class Shop {
                         line = bufferedReader.readLine();
                     }
                 }
+            }
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    private static boolean LoadCategories(ProductManager productManager) {
+        try {
+            FileReader fileReader = new FileReader(categorySaveFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = bufferedReader.readLine();
+            productManager.categoryArrayList.clear();
+            while (line != null) {
+                String[] variables = line.split(",");
+                String categoryName = variables[0];
+                Category category = new Category(categoryName);
+                productManager.categoryArrayList.add(category);
+                line = bufferedReader.readLine();
+            }
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    private static boolean LoadOrders(ProductManager productManager) {
+        try {
+            FileReader fileReader = new FileReader(ordersSaveFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = bufferedReader.readLine();
+            productManager.orderArrayList.clear();
+            while (line != null) {
+                String[] variables = line.split(",");
+                String customerName = variables[0];
+                int id = Integer.parseInt(variables[1]);
+                ArrayList<String> orderList = new ArrayList<String>();
+                productManager.orderArrayList.add(new Order(customerName, id, orderList));
+                line = bufferedReader.readLine();
             }
             return true;
         }
