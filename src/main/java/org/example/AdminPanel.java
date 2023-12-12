@@ -7,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class AdminPanel {
-    ProductManager productManager = new ProductManager();
     private JList list2;
     private JButton AddButton;
     private JTextField Field1;
@@ -26,8 +25,8 @@ public class AdminPanel {
     private DefaultListModel listModel2 = new DefaultListModel<>();
     private DefaultListModel listmodel3 = new DefaultListModel();
     JFrame jframe = new JFrame();
-    public AdminPanel(Admin admin, ProductManager productManager){
-        jframe.setSize(1000,500);
+    public AdminPanel(Admin admin, ProductManager productManager) {
+        jframe.setSize(1000, 500);
         jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jframe.setContentPane(AdminPanel);
         list2.setModel(listModel);
@@ -38,13 +37,13 @@ public class AdminPanel {
         //ScrollpaneCustomers.setViewportView(scrollPaneList1);
         jframe.setVisible(true);
 
-        for (Employee user: admin.EmployeeList) {
-                listModel.addElement(user.getDescription());
+        for (Employee user : admin.EmployeeList) {
+            listModel.addElement(user.getDescription());
         }
-        for (Customer user: admin.CustomerList) {
-                listModel2.addElement(user.getDescription());
+        for (Customer user : admin.CustomerList) {
+            listModel2.addElement(user.getDescription());
         }
-        for (Product product: productManager.productArrayList){
+        for (Product product : productManager.productArrayList) {
             listmodel3.addElement(product.getName() + "  " + product.getCost());
         }
 
@@ -61,12 +60,12 @@ public class AdminPanel {
                     Field2.setText("");
                     Message.setText("Cannot be empty!");
                 }
-                for (Employee user: admin.EmployeeList) {
-                        if (user.getUsername().equals(Text1)) {
-                            listModel.addElement(user.getDescription());
-                            Field1.setText("");
-                            Field2.setText("");
-                            Message.setText("");
+                for (Employee user : admin.EmployeeList) {
+                    if (user.getUsername().equals(Text1)) {
+                        listModel.addElement(user.getDescription());
+                        Field1.setText("");
+                        Field2.setText("");
+                        Message.setText("");
                     }
                 }
             }
@@ -122,6 +121,7 @@ public class AdminPanel {
                                     long roundprice = Math.round(price);
                                     int sendprice = (int) roundprice;
                                     product.setCost(sendprice);
+                                    RefreshProductList(productManager);
                                     discountMessage.setText(product.getName() + " now has " + Math.round(discount) + "% discount");
                                     Field3Discount.setText("");
                                 }
@@ -134,11 +134,9 @@ public class AdminPanel {
                         discountMessage.setText("Please enter a value between 0-100...");
                         Field3Discount.setText("");
                     }
-                }
-                catch (NumberFormatException n){
+                } catch (NumberFormatException n) {
                     discountMessage.setText("Please type a value");
-                    }
-
+                }
 
 
             }
@@ -180,5 +178,11 @@ public class AdminPanel {
                 super.keyReleased(e);
             }
         });
+
+    } private void RefreshProductList(ProductManager productManager) {
+        listmodel3.removeAllElements();
+        for (Product product : productManager.productArrayList) {
+            listmodel3.addElement(product.getName() + "  " + product.getCost());
+        }
     }
 }
