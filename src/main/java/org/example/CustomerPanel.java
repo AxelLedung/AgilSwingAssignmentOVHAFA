@@ -3,6 +3,7 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class CustomerPanel {
     private JPanel jPanel;
@@ -16,6 +17,14 @@ public class CustomerPanel {
     private JLabel jCategoryLabel;
     private JLabel jCostLabel;
     private JLabel jNameLabel;
+    private JButton sortNameButton;
+    private JButton sortCategoryButton;
+    private JButton sortPriceButton;
+    private JPanel productInformationPanel;
+    private JTextField searchTextField;
+    private JButton searchButton;
+    private JPanel showProductDisplay;
+    private JPanel productCheckoutPanel;
     private DefaultListModel productListModel = new DefaultListModel();
     private DefaultListModel checkoutListModel = new DefaultListModel();
     private Customer currentUser;
@@ -28,10 +37,9 @@ public class CustomerPanel {
         jFrame.setVisible(true);
         jProductList.setModel(productListModel);
         jCheckoutList.setModel(checkoutListModel);
-
-        for (int i = 0; i < productManager.productArrayList.size(); i++) {
-            productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
-        }
+        productInformationPanel.setVisible(false);
+        DisplayProductsByName(productManager);
+        //Returns the user back to Login window
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,6 +47,7 @@ public class CustomerPanel {
                 jFrame.dispose();
             }
         });
+        //Send all the chosen products to the checkout
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,6 +55,7 @@ public class CustomerPanel {
                 jFrame.dispose();
             }
         });
+        //Add a Product
         addProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +66,7 @@ public class CustomerPanel {
                 }
             }
         });
+        //Add a review
         reviewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,14 +74,16 @@ public class CustomerPanel {
                 jFrame.dispose();
             }
         });
-
+        //Displays the Product Information Panel
+        //Updates the Product information to show the chosen products information
         jProductList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                productInformationPanel.setVisible(true);
                 super.mouseClicked(e);
                 int index = jProductList.getSelectedIndex();
                 jNameLabel.setText(productManager.productArrayList.get(index).getName());
-                jCategoryLabel.setText(productManager.productArrayList.get(index).getCategory());
+                jCategoryLabel.setText(productManager.productArrayList.get(index).getCategory().getName());
                 jCostLabel.setText(Integer.toString(productManager.productArrayList.get(index).getCost()));
                 String reviewString = "";
                 for (Review r : productManager.productArrayList.get(index).getReviewArrayList()) {
@@ -80,5 +93,53 @@ public class CustomerPanel {
                 jReviewText.setText(reviewString);
             }
         });
+        sortPriceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayProductsByPrice(productManager);
+            }
+        });
+        sortCategoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayProductsByCategory(productManager);
+            }
+        });
+        sortNameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayProductsByName(productManager);
+            }
+        });
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+    public void DisplayProductsByCategory(ProductManager productManager) {
+        productListModel.clear();
+        ArrayList<Product> sortedProductList = productManager.productArrayList;
+        sortedProductList.sort((p1, p2) -> p1.getCategory().getName().compareTo(p2.getCategory().getName()));
+        for (int i = 0; i < sortedProductList.size(); i++) {
+            productListModel.addElement(sortedProductList.get(i).GetDescription());
+        }
+    }
+    public void DisplayProductsByPrice(ProductManager productManager) {
+        productListModel.clear();
+        ArrayList<Product> sortedProductList = productManager.productArrayList;
+        sortedProductList.sort((p1, p2) -> p1.getCost() - p2.getCost());
+        for (int i = 0; i < sortedProductList.size(); i++) {
+            productListModel.addElement(sortedProductList.get(i).GetDescription());
+        }
+    }
+    public void DisplayProductsByName(ProductManager productManager) {
+        productListModel.clear();
+        ArrayList<Product> sortedProductList = productManager.productArrayList;
+        sortedProductList.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+        for (int i = 0; i < sortedProductList.size(); i++) {
+            productListModel.addElement(sortedProductList.get(i).GetDescription());
+        }
     }
 }
