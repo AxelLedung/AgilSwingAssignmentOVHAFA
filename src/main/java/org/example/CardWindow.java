@@ -114,7 +114,7 @@ public class CardWindow {
                     for (Product p : productsToCheckoutArrayList) {
                         transferList.add(p.getName());
                     }
-                    productManager.orderList.add(new Order(name, cost, transferList));
+                    productManager.orderArrayList.add(new Order(name, cost, transferList));
                     currentUser.setBalance(currentUser.getBalance() - cost);
                     CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
                     jFrame.dispose();

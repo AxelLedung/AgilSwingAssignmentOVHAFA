@@ -21,18 +21,18 @@ public class PastPurchasesWindow {
         jFrame.setSize(600, 600);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        orderListRefresh(productManager.orderList, currentUser);
+        orderListRefresh(productManager.orderArrayList, currentUser);
         refundOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object element = orderJList.getModel().getElementAt(orderJList.getSelectedIndex()).toString()
                         .replace(" ","").replace(",","");
-                for(Order o : productManager.getOrders()){
+                for(Order o : productManager.orderArrayList){
                     Object findThing = o.getId() + o.getCustomerName() + o.getOrderSum() + o.getOrderList().toString()
                             .replace(" ","").replace("," ,"")
                             .replace("[", "").replace("]","");
                     if(findThing.equals(element)){
-                        productManager.refundList.add(o);
+                        productManager.refundArrayList.add(o);
                         currentUser.setBalance(currentUser.getBalance() + o.getSum());
                         for(String or : o.getOrderList()){
                             for(Product p : productManager.productArrayList){
@@ -41,11 +41,11 @@ public class PastPurchasesWindow {
                                 }
                             }
                         }
-                        productManager.orderList.remove(o.getId());
+                        productManager.orderArrayList.remove(o.getId());
                         break;
                     }
                 }
-                orderListRefresh(productManager.orderList, currentUser);
+                orderListRefresh(productManager.orderArrayList, currentUser);
             }
         });
         goBackToCheckoutButton.addActionListener(new ActionListener() {
