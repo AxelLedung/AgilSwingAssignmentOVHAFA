@@ -55,7 +55,7 @@ public class CheckoutWindow {
                     for (Product p : productsToCheckoutArrayList) {
                         transferList.add(p.getName());
                     }
-                    productManager.orderList.add(new Order(name, finalCost, transferList));
+                    productManager.orderArrayList.add(new Order(name, finalCost, transferList));
                     currentUser.setBalance(currentUser.getBalance() - finalCost);
                     CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
                     jFrame.dispose();
