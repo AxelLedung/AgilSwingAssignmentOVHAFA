@@ -1,20 +1,12 @@
 package org.example;
 
 public class User {
-    private int id;
     private String userName;
     private String password;
 
-    public User(int id, String userName, String password) {
-        this.id = id;
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
-    }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
     public String getUsername() {
         return userName;
@@ -23,10 +15,10 @@ public class User {
         this.userName = userName;
     }
     public String getDescription() {
-        return "Id: " + id + ", Username: " + userName + ", Password: " + password;
+        return "Username: " + userName + ", Password: " + password;
     }
     public String getCSV () {
-        return id + "," + userName + "," + password;
+        return userName + "," + password;
     }
     public String getPassword() {
         return password;

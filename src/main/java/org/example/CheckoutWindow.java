@@ -16,10 +16,10 @@ public class CheckoutWindow {
     private JButton logOutButton;
     private JLabel userLabel;
     private JButton removeFromCartButton;
+    private JButton reviewOrdersButton;
     DefaultListModel listModel = new DefaultListModel<>();
     private String name;
     int finalCost;
-    ArrayList<Order> orderList = new ArrayList<>();
     ArrayList<String> transferList = new ArrayList<>();
 
 
@@ -55,7 +55,7 @@ public class CheckoutWindow {
                     for (Product p : productsToCheckoutArrayList) {
                         transferList.add(p.getName());
                     }
-                    orderList.add(new Order(name, finalCost, transferList));
+                    productManager.orderList.add(new Order(name, finalCost, transferList));
                     currentUser.setBalance(currentUser.getBalance() - finalCost);
                     CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
                     jFrame.dispose();
@@ -81,6 +81,13 @@ public class CheckoutWindow {
                     productsToCheckoutArrayList.remove(removeIndex);
                     checkoutListRefresh(productsToCheckoutArrayList);
                 }
+            }
+        });
+        reviewOrdersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PastPurchasesWindow past = new PastPurchasesWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
+                jFrame.dispose();
             }
         });
     }
