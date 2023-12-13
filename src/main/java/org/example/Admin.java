@@ -13,6 +13,8 @@ public class Admin {
         CustomerList.add(new Customer("Ingvar","1234",50000));
         CustomerList.add(new Customer("Ulla","1234",35000));
         CustomerList.add(new Customer("Sven","1234",123));
+        CardList.add(new Card("Ulla",325673469,223,4567));
+        CardList.add(new Card("Sven",325684129,667,1234));
     }
     public void AddCustomer(String username, String password, int balance){
         CustomerList.add(new Customer(username, password, balance));
