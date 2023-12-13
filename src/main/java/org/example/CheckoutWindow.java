@@ -19,7 +19,7 @@ public class CheckoutWindow {
     private JButton reviewOrdersButton;
     DefaultListModel listModel = new DefaultListModel<>();
     private String name;
-    int finalCost;
+    private int finalCost;
     ArrayList<String> transferList = new ArrayList<>();
 
 
@@ -28,7 +28,7 @@ public class CheckoutWindow {
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
         jFrame.setContentPane(checkoutWindow);
-        jFrame.setSize(1000, 1000);
+        jFrame.setSize(600, 600);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         checkoutListRefresh(productsToCheckoutArrayList);

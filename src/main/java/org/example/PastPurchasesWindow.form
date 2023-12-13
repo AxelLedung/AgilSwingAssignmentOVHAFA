@@ -10,18 +10,22 @@
     <children>
       <component id="c47f1" class="javax.swing.JList" binding="orderJList">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="1" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <model/>
+          <selectionMode value="1"/>
+        </properties>
       </component>
       <component id="367af" class="javax.swing.JButton" binding="refundOrderButton" default-binding="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Refind order"/>
+          <hideActionText value="false"/>
+          <text value="Refund order"/>
         </properties>
       </component>
       <component id="ad84c" class="javax.swing.JButton" binding="goBackToCheckoutButton" default-binding="true">
