@@ -4,15 +4,19 @@ import java.util.ArrayList;
 
 public class ProductManager {
     ArrayList<Product> productArrayList = new ArrayList<Product>();
-    ArrayList<Category> categoryArrayList = new ArrayList<Category>();
+    ArrayList<String> categoryArrayList = new ArrayList<String>();
     ArrayList<Order> orderArrayList = new ArrayList<Order>();
+    ArrayList<Order> refundList = new ArrayList<Order>();
      public ProductManager(){
-         Category tools = new Category("Tools");
-         Category hardware = new Category("Hardware");
+         categoryArrayList.add("Tools");
+         categoryArrayList.add("Hardware");
      }
     public ArrayList<Product> GetInventory() {
         return productArrayList;
     }
-    public ArrayList<Category> GetCategories() { return categoryArrayList; }
+    public ArrayList<String> GetCategories() { return categoryArrayList; }
     public ArrayList<Order> getCategoryArrayList() { return orderArrayList; }
+    public ArrayList<Order> getOrders(){
+        return orderArrayList;
+    }
 }
