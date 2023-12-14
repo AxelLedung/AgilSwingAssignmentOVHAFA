@@ -18,11 +18,7 @@ public class CheckoutWindow {
     private JButton removeFromCartButton;
     private JButton reviewOrdersButton;
     DefaultListModel listModel = new DefaultListModel<>();
-    private String name;
     private int finalCost;
-    ArrayList<String> transferList = new ArrayList<>();
-
-
 
     public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList, Admin admin) {
         checkoutJList.setModel(listModel);
@@ -65,6 +61,8 @@ public class CheckoutWindow {
                     costLabel.setText("You don't have enough money to finalize the purchase" +
                             " or there aren't enough items in stock.");
                 }
+                CardWindow cardWindow = new CardWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
+                jFrame.dispose();
             }
         });
         logOutButton.addActionListener(new ActionListener() {

@@ -32,7 +32,7 @@ public class PastPurchasesWindow {
                             .replace(" ","").replace("," ,"")
                             .replace("[", "").replace("]","");
                     if(findThing.equals(element)){
-                        productManager.refundList.add(o);
+                        productManager.refundArrayList.add(o);
                         currentUser.setBalance(currentUser.getBalance() + o.getSum());
                         for(String or : o.getOrderList()){
                             for(Product p : productManager.productArrayList){
