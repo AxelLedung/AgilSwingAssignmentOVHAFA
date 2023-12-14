@@ -16,7 +16,7 @@ public class EmployeePanel {
     private JButton manageReviewsButton;
     private Employee currentEmployee;
     private Product selectedProduct;
-//    private DefaultListModel productListModel = new DefaultListModel();
+    private DefaultListModel productListModel = new DefaultListModel();
 
 
     public EmployeePanel(ProductManager productManager, Admin admin,Employee currentEmployee) {
@@ -48,41 +48,13 @@ public class EmployeePanel {
         manageReviewsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    selectedProduct.setName(selectedProductName.getText());
-                    selectedProduct.setCost(Integer.parseInt(selectedProductCost.getText()));
-                    selectedProduct.setCategory(selectedProductCategory.getText());
-                    selectedProduct.setQuantity(Integer.parseInt(selctedProductQuantity.getText()));
-                    Shop.Save(productManager, admin);
-                    EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
-                    jFrame.setVisible(false);
-                } catch (Exception exception){
-                    messageLabel.setText("Something went wrong, please try again!");
-                }
+                
             }
         });
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    String newProductName = selectedProductName.getText();
-                    int newProductCost = Integer.parseInt(selectedProductCost.getText());//Maby try catch
-                    String newProductCategory = selectedProductCategory.getText();
-                    int newProductQuantity = Integer.parseInt(selctedProductQuantity.getText());
-                    if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
-                        System.out.println("#1" + productManager.productArrayList);
-                        productManager.productArrayList.add(new Product(newProductName, newProductCategory, newProductCost, newProductQuantity));
-                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
-                        System.out.println("#2" + productManager.productArrayList);
-                        Shop.Save(productManager, admin);
-                        jFrame.setVisible(false);
-                    }else {
-                        messageLabel.setText("Please make sure that you filled all the fields and try again!");
-                    }
-                } catch (Exception exception){
-                    messageLabel.setText("Please type in numbers into Cost/Quantity fields");
-                }
-               AddProductWindow addProductWindow=new AddProductWindow(productManager);
+                AddProductWindow addProductWindow=new AddProductWindow(productManager);
             }
         });
         logoutButton.addActionListener(new ActionListener() {
