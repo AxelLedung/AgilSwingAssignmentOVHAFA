@@ -19,12 +19,17 @@ public class Shop {
     }
     public static boolean Save(ProductManager productManager, Admin admin) {
         SaveUsers(admin);
+        SaveReviews(productManager);
+        SaveCategories(productManager);
+        SaveOrders(productManager);
         SaveProducts(productManager);
-        Load(productManager, admin);
         return true;
     }
     public static boolean Load(ProductManager productManager, Admin admin) {
         LoadUsers(admin);
+        LoadCategories(productManager);
+        //LoadReviews
+        LoadOrders(productManager);
         LoadProducts(productManager);
         return true;
     }
@@ -228,9 +233,35 @@ public class Shop {
             while (line != null) {
                 String[] variables = line.split(",");
                 String customerName = variables[0];
-                int id = Integer.parseInt(variables[1]);
+                int orderSum = Integer.parseInt(variables[1]);
+                String[] orderListStringArray = variables[2].split("#");
                 ArrayList<String> orderList = new ArrayList<String>();
-                productManager.orderArrayList.add(new Order(customerName, id, orderList));
+                orderList.addAll(Arrays.asList(orderListStringArray));
+                productManager.orderArrayList.add(new Order(customerName, orderSum, orderList));
+                line = bufferedReader.readLine();
+            }
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    private static boolean LoadReviews(ProductManager productManager) {
+        try {
+            FileReader fileReader = new FileReader(ordersSaveFile);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = bufferedReader.readLine();
+            productManager.orderArrayList.clear();
+            while (line != null) {
+                DENNA FUNKTION ÄR INTE KLAR
+                String[] variables = line.split(",");
+                String customerName = variables[0];
+                int orderSum = Integer.parseInt(variables[1]);
+                String[] orderListStringArray = variables[2].split("#");
+                ArrayList<String> orderList = new ArrayList<String>();
+                orderList.addAll(Arrays.asList(orderListStringArray));
+                productManager.orderArrayList.add(new Order(customerName, orderSum, orderList));
                 line = bufferedReader.readLine();
             }
             return true;
