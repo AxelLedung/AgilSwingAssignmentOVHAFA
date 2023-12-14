@@ -154,13 +154,18 @@ public class CardWindow {
         makePurchaseButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Integer.parseInt(pinCheckField.getText()) == currentCard.getPin()) {
-                    pinChecked = true;
-                    cardWindow.removeAll();
-                    cardWindow.add(finalizePurchase);
-                    cardWindow.repaint();
-                    cardWindow.revalidate();
-                } else {
+                boolean found = false;
+                for(Card c : admin.CardList) {
+                    if (Integer.parseInt(pinCheckField.getText()) == c.getPin() && currentUser.getUsername().equals(c.getCardHolder())) {
+                        pinChecked = true;
+                        found = true;
+                        cardWindow.removeAll();
+                        cardWindow.add(finalizePurchase);
+                        cardWindow.repaint();
+                        cardWindow.revalidate();
+                    }
+                }
+                if(!found) {
                     pinReturn.setText("Incorrect PIN number, try again");
                     tries++;
                 }
