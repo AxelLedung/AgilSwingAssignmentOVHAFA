@@ -18,9 +18,8 @@ public class CheckoutWindow {
     private JButton removeFromCartButton;
     private JButton reviewOrdersButton;
     DefaultListModel listModel = new DefaultListModel<>();
-    private String name;
-    int finalCost;
-    ArrayList<String> transferList = new ArrayList<>();
+    private int finalCost;
+
 
 
 
@@ -28,7 +27,7 @@ public class CheckoutWindow {
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
         jFrame.setContentPane(checkoutWindow);
-        jFrame.setSize(1000, 1000);
+        jFrame.setSize(600, 600);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         checkoutListRefresh(productsToCheckoutArrayList);
@@ -44,26 +43,8 @@ public class CheckoutWindow {
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean purchased = false;
-                for (Product pr : productsToCheckoutArrayList) {
-                    if (currentUser.getBalance() >= finalCost && pr.checkQuantity(pr.getQuantity())) {
-                       purchased = true;
-                    }
-                }
-                if(purchased){
-                    name = currentUser.getUsername();
-                    for (Product p : productsToCheckoutArrayList) {
-                        transferList.add(p.getName());
-                    }
-                    productManager.orderList.add(new Order(name, finalCost, transferList));
-                    currentUser.setBalance(currentUser.getBalance() - finalCost);
-                    CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
-                    jFrame.dispose();
-                }
-                else {
-                    costLabel.setText("You don't have enough money to finalize the purchase" +
-                            " or there aren't enough items in stock.");
-                }
+                CardWindow cardWindow = new CardWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
+                jFrame.dispose();
             }
         });
         logOutButton.addActionListener(new ActionListener() {

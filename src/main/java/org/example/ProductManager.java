@@ -3,11 +3,13 @@ package org.example;
 import java.util.ArrayList;
 
 public class ProductManager {
-    ArrayList<Product> productArrayList = new ArrayList<>();
-    ArrayList<Order> orderList = new ArrayList<>();
-    ArrayList<Order> refundList = new ArrayList<>();
-
+    ArrayList<Product> productArrayList = new ArrayList<Product>();
+    ArrayList<String> categoryArrayList = new ArrayList<String>();
+    ArrayList<Order> orderArrayList = new ArrayList<Order>();
+    ArrayList<Order> refundArrayList = new ArrayList<>();
      public ProductManager(){
+         categoryArrayList.add("Tools");
+         categoryArrayList.add("Hardware");
          productArrayList.add(new Product("Handdrill", 20,"Tool", 5));
          productArrayList.add(new Product("Steel", 200,"Hardware", 25));
          productArrayList.add(new Product("Nuts M12", 12,"Hardware", 3));
@@ -27,7 +29,9 @@ public class ProductManager {
     public ArrayList<Product> GetInventory() {
         return productArrayList;
     }
+    public ArrayList<String> GetCategories() { return categoryArrayList; }
+    public ArrayList<Order> getCategoryArrayList() { return orderArrayList; }
     public ArrayList<Order> getOrders(){
-         return orderList;
+        return orderArrayList;
     }
 }
