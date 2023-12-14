@@ -12,11 +12,10 @@ public class LoginPanel {
     private JPasswordField passwordField;
     private JButton registerButton;
     private JButton loginButton;
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
     private JLabel messageLabel;
     private String adminUsername = "admin";
     private String adminPassword = "1234";
+    Error errorWindow;
 
     public LoginPanel(ProductManager productManager, Admin admin) {
         JFrame jFrame = new JFrame();
@@ -33,7 +32,7 @@ public class LoginPanel {
                 for (User user : admin.CustomerList) {
                     if (usernameTextField.getText().equals(user.getUsername())) {
                         exists = true;
-                        messageLabel.setText("Username already exists!");
+                        errorWindow = new Error("Error", "Username already exists!");
                         break;
                     }
                 }
@@ -42,7 +41,7 @@ public class LoginPanel {
                 for (User user : admin.EmployeeList) {
                     if (usernameTextField.getText().equals(user.getUsername())) {
                         exists = true;
-                        messageLabel.setText("Username already exists!");
+                        errorWindow = new Error("Error", "Username already exists!");
                         break;
                     }
                 }
@@ -88,7 +87,7 @@ public class LoginPanel {
                     }
                 }
                 if(!found) {
-                    messageLabel.setText("Wrong credentials.");
+                    errorWindow = new Error("Error", "Wrong credentials.");
                 }
             }
         });
