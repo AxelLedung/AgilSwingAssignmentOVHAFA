@@ -25,7 +25,7 @@ public class EditProduct {
     private DefaultListModel productListModel = new DefaultListModel();
     private Product selectedProduct;
 
-    public EditProduct(ProductManager productManager){
+    public EditProduct(ProductManager productManager, Admin admin){
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jFrame.setSize(700, 800);
@@ -56,6 +56,7 @@ public class EditProduct {
                     productPriceField.setText("");
                     productCategoryField.setText("");
                     productQuantityField.setText("");
+                    Shop.Save(productManager, admin);
                 }
 
 
@@ -72,6 +73,7 @@ public class EditProduct {
                 productQuantityField.setText(""+ selectedProduct.getQuantity());
                 editProductButton.setEnabled(false);
                 applyButton.setEnabled(true);
+                Shop.Save(productManager, admin);
             }
         });
         applyButton.addActionListener(new ActionListener() {
@@ -93,6 +95,7 @@ public class EditProduct {
                         productCategoryField.setText("");
                         productQuantityField.setText("");
                         applyButton.setEnabled(false);
+                        Shop.Save(productManager, admin);
 
 
                     } catch (Exception exception){

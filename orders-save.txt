@@ -1,0 +1,4 @@
+0,axel,100,Handdrill Makita#
+1,axel,40,Motoroil Fully-Synthetic 5W-60 1 liter#
+3,axel,40,Motoroil Fully-Synthetic 5W-60 4 liter#
+4,axel,82,Motoroil Fully-Synthetic 5W-60 1 liter#Motoroil Fully-Synthetic 5W-60 4 liter#Nuts M11

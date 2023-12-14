@@ -135,6 +135,7 @@ public class CardWindow {
                         currentUser.setBalance(currentUser.getBalance() - cost);
                         cardWindow.removeAll();
                         cardWindow.add(purchaseComplete);
+                        Shop.Save(productManager, admin);
                         cardWindow.repaint();
                         cardWindow.revalidate();
                     } else {

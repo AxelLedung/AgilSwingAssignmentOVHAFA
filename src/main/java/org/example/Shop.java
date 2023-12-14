@@ -137,7 +137,10 @@ public class Shop {
                 String productCategory = variables[1];
                 int productCost = Integer.parseInt(variables[2]);
                 int quantity = Integer.parseInt(variables[3]);
-                String[] reviewVariables = variables[4].split("#");
+                String[] reviewList = null;
+                if (variables.length > 4) {
+                    reviewList = variables[4].split("#");
+                }
 
                 // Checking if the chosen category exists if not create it. -- START
                 String category = null;
@@ -156,19 +159,28 @@ public class Shop {
                 }
                 // Checking if the chosen category exists if not create it. -- END
 
-                //Turn review string into a Review Object -- START
-                String reviewText = reviewVariables[0];
-                Customer reviewCustomer = null;
-                for (Customer c : admin.CustomerList) {
-                    if (c.getUsername().equals(reviewVariables[1])) {
-                        reviewCustomer = c;
-                    }
-                }
-                int reviewRating = Integer.parseInt(reviewVariables[2]);
                 Product product = new Product(productName, category, productCost, quantity);
                 productManager.productArrayList.add(product);
-                ArrayList<Review> reviewArrayList = new ArrayList<Review>();
-                reviewArrayList.add(new Review(reviewText, reviewCustomer, reviewRating));
+                //Turn review string into a Review Object -- START
+                if (reviewList != null)  {
+                    ArrayList<Review> reviewArrayList = new ArrayList<Review>();
+                    for (int i = 0; i < reviewList.length; i++) {
+                        String[] review = reviewList[i].split("@");
+                        String reviewText = review[0];
+                        String reviewCustomerString = review[1];
+                        int reviewRating = Integer.parseInt(review[2]);
+                        Customer reviewCustomer = null;
+                        for (Customer c : admin.CustomerList) {
+                            if (c.getUsername().equals(reviewCustomerString)) {
+                                reviewCustomer = c;
+                            }
+                        }
+                        reviewArrayList.add(new Review(reviewText, reviewCustomer, reviewRating));
+                    }
+                    product.setReviewArrayList(reviewArrayList);
+                }
+                else {
+                }
                 //Turn review string into a Review Object -- END
 
                 line = bufferedReader.readLine();
@@ -176,7 +188,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Products failed to load: " + e);
             return false;
         }
     }
@@ -214,7 +226,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Users failed to load: " + e);
             return false;
         }
     }
@@ -233,7 +245,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Categories failed to load: " + e);
             return false;
         }
     }
@@ -245,18 +257,19 @@ public class Shop {
             productManager.orderArrayList.clear();
             while (line != null) {
                 String[] variables = line.split(",");
-                String customerName = variables[0];
-                int orderSum = Integer.parseInt(variables[1]);
-                String[] orderListStringArray = variables[2].split("#");
+                int id = Integer.parseInt(variables[0]);
+                String customerName = variables[1];
+                int orderSum = Integer.parseInt(variables[2]);
+                String[] orderListStringArray = variables[3].split("#");
                 ArrayList<String> orderList = new ArrayList<String>();
                 orderList.addAll(Arrays.asList(orderListStringArray));
-                productManager.orderArrayList.add(new Order(customerName, orderSum, orderList));
+                productManager.orderArrayList.add(new Order(id, customerName, orderSum, orderList));
                 line = bufferedReader.readLine();
             }
             return true;
         }
         catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Orders failed to load: " + e);
             return false;
         }
     }

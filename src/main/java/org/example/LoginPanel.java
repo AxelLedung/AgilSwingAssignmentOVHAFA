@@ -65,6 +65,7 @@ public class LoginPanel {
                     // Admin.
                     if (usernameTextField.getText().equals(adminUsername) && passwordField.getText().equals(adminPassword)) {
                         AdminPanel adminPanel = new AdminPanel(admin, productManager);
+                        found = true;
                         usernameTextField.setText("");
                         passwordField.setText("");
                         jFrame.dispose();

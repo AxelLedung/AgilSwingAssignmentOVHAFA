@@ -14,7 +14,7 @@ public class AddProductWindow {
     private JButton cancelButton;
     private JLabel messageLabel;
 
-    public AddProductWindow(ProductManager productManager){
+    public AddProductWindow(ProductManager productManager, Admin admin){
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jFrame.setSize(300, 400);
@@ -31,13 +31,14 @@ public class AddProductWindow {
                     int newProductQuantity = Integer.parseInt(productQuantityField.getText());
                     if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
                         //Save() ...VÄNTAR PÅ AXEL
-                        productManager.productArrayList.add(new Product(newProductName, newProductCost, newProductCategory,newProductQuantity));
+                        productManager.productArrayList.add(new Product(newProductName, newProductCategory, newProductCost, newProductQuantity));
                         //Här nedan töms fieldsen efter man har sparat den nya produkten.
                         productNameField.setText("");
                         productPriceField.setText("");
                         productCategoryField.setText("");
                         productQuantityField.setText("");
                         messageLabel.setText(newProductName+" has been created successfully!");
+                        Shop.Save(productManager, admin);
 
                     }else {
                         Error error = new Error("Empty fields", "Please make sure that you filled all the fields and try again!");

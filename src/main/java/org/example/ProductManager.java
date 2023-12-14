@@ -8,8 +8,6 @@ public class ProductManager {
     ArrayList<Order> orderArrayList = new ArrayList<Order>();
     ArrayList<Order> refundArrayList = new ArrayList<>();
      public ProductManager(){
-         categoryArrayList.add("Tools");
-         categoryArrayList.add("Hardware");
      }
     public ArrayList<Product> GetInventory() {
         return productArrayList;

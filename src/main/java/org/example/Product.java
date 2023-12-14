@@ -19,16 +19,24 @@ public class Product {
         String reviewListString = null;
         if (!reviewArrayList.isEmpty()) {
             for (int i = 0; i < reviewArrayList.size(); i++) {
-                if (i == reviewArrayList.size() - 1)
+                if (i == 0) {
+                    reviewListString = reviewArrayList.get(i).getCSV() + "#";
+                }
+                else if (i == reviewArrayList.size() - 1)
                 {
                     reviewListString = reviewListString += reviewArrayList.get(i).getCSV();
                 }
                 else {
-                    reviewListString = reviewListString += reviewArrayList.get(i) + "#";
+                    reviewListString = reviewListString += reviewArrayList.get(i).getCSV() + "#";
                 }
             }
         }
-        return name + "," + category + "," + cost + "," + quantity + "," + reviewListString;
+        if (!reviewArrayList.isEmpty()) {
+            return name + "," + category + "," + cost + "," + quantity + "," + reviewListString;
+        }
+        else {
+            return name + "," + category + "," + cost + "," + quantity;
+        }
     }
     public boolean checkQuantity(int quantity){
         if(this.quantity > 0) {

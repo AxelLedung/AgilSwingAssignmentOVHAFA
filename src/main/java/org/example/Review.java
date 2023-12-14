@@ -29,6 +29,6 @@ public class Review {
         //la till rating i constructor
     }
     public String getCSV() {
-        return text + "," + customer.getUsername() + "," + rating;
+        return text + "@" + customer.getUsername() + "@" + rating;
     }
 }

@@ -16,6 +16,13 @@ public class Order {
         this.orderSum = orderSum;
         this.orderList = orderList;
     }
+    public Order(int id, String customerName, int orderSum, ArrayList<String> orderList) {
+        this.id = id;
+        nextId = id + 1;
+        this.customerName = customerName;
+        this.orderSum = orderSum;
+        this.orderList = orderList;
+    }
 
     public String getDescription(){
         String bracketLess = orderList.toString().replace("[","").replace("]","");
@@ -61,7 +68,10 @@ public class Order {
         String orderListString = null;
         if (!orderList.isEmpty()) {
             for (int i = 0; i < orderList.size(); i++) {
-                if (i == orderList.size() - 1)
+                if (i == 0) {
+                    orderListString = orderList.get(i) + "#";
+                }
+                else if (i == orderList.size() - 1)
                 {
                     orderListString = orderListString += orderList.get(i);
                 }
@@ -70,6 +80,6 @@ public class Order {
                 }
             }
         }
-        return customerName + "," + orderSum + "," + orderListString;
+        return id + "," + customerName + "," + orderSum + "," + orderListString;
     }
 }

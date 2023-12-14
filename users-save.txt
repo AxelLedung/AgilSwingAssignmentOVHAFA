@@ -1,8 +1,13 @@
 Kent,1234
 Ingvar,1234
 Ulla,1234
+Yngve,1234
 @
-axel,1234,500
+adam,1234,5000
+bertil,1234,5000
+ceasar,1234,5000
+david,1234,5000
+erik,1234,100000
+filip,1234,1337
+axel,1234,320
 lars,1234,500
-karl,1234,500
-lotta,1234,500

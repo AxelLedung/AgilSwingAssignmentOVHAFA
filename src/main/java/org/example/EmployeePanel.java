@@ -42,7 +42,7 @@ public class EmployeePanel {
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EditProduct editProduct = new EditProduct(productManager);
+                EditProduct editProduct = new EditProduct(productManager, admin);
             }
         });
         manageReviewsButton.addActionListener(new ActionListener() {
@@ -54,7 +54,7 @@ public class EmployeePanel {
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddProductWindow addProductWindow=new AddProductWindow(productManager);
+                AddProductWindow addProductWindow=new AddProductWindow(productManager, admin);
             }
         });
         logoutButton.addActionListener(new ActionListener() {
