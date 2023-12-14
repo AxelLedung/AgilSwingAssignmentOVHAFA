@@ -21,6 +21,8 @@ public class ReviewPanel extends JFrame {
     private JLabel rvLabel2;
     private JButton CustomerPanelButton;
     private DefaultListModel productListModel = new DefaultListModel();
+    private int selectedRating = -1;
+    // standardvärde när ingen rating är vald
     public ReviewPanel(ProductManager productManager, Customer currentUser, Admin admin) {
         JFrame jFrame = new JFrame();
         jFrame.setContentPane(Panel1);
@@ -37,8 +39,9 @@ public class ReviewPanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = jProductList.getSelectedIndex();
-                if (index >= 0) {
-                    productManager.productArrayList.get(index).getReviewArrayList().add(new Review(textArea1.getText(), currentUser));
+                if (index >= 0 && selectedRating != -1) {
+                    productManager.productArrayList.get(index).getReviewArrayList().add(new Review(textArea1.getText(), currentUser, selectedRating));
+                    //checkar nu för selected rating
                     Shop.Save(productManager, admin);
                 }
             }
@@ -50,36 +53,51 @@ public class ReviewPanel extends JFrame {
                 jFrame.setVisible(false);
             }
         });
-    }
-    /*private void saveToFile() {
-        JFileChooser fileChooser = new JFileChooser();
-
-        int result = fileChooser.showSaveDialog(this);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile, true))) {
-                writer.write("Product: " + jProductList.getText() + "\n");
-                writer.write("Review: ");
-                writer.write(textArea1.getText() + "\n");
-                writer.write("Rating: ");
-                appendCheckBoxState(writer, a1CheckBox);
-                appendCheckBoxState(writer, a2CheckBox);
-                appendCheckBoxState(writer, a3CheckBox);
-                appendCheckBoxState(writer, a4CheckBox);
-                appendCheckBoxState(writer, a5CheckBox);
-                writer.write("\n");
-                JOptionPane.showMessageDialog(this, "Review saved");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+        a1CheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedRating = 1;
             }
-        }
-    }*/
+        });
+        a2CheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedRating = 2;
+            }
+        });
+        a3CheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedRating = 3;
+            }
+        });
+        a4CheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedRating = 4;
+            }
+        });
+        a5CheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedRating = 5;
+            }
+        });
+    }
+
+    private ActionListener createRatingActionListener(final int rating) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Sätt vald rating när en knapp är tryckt
+                selectedRating = rating;
+            }
+        };
+    }
+
     private void appendCheckBoxState(BufferedWriter writer, JCheckBox checkBox) throws IOException {
         if (checkBox.isSelected()) {
             writer.write(checkBox.getText() + " ");
         }
     }
 }
-

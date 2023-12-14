@@ -87,8 +87,7 @@ public class CustomerPanel {
                 jCostLabel.setText(Integer.toString(productManager.productArrayList.get(index).getCost()));
                 String reviewString = "";
                 for (Review r : productManager.productArrayList.get(index).getReviewArrayList()) {
-
-                    reviewString = reviewString + "\n\r" + r.getCustomer().getUsername() + " tycker:" + "\n\r" + r.getText();
+                    reviewString = reviewString + "\n\r" + r.getCustomer().getUsername() + " tycker:" + "\n\r" + r.getText() + " Rating: " + r.getRating();
                 }
                 jReviewText.setText(reviewString);
             }

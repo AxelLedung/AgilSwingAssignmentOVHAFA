@@ -16,10 +16,10 @@ public class CheckoutWindow {
     private JButton logOutButton;
     private JLabel userLabel;
     private JButton removeFromCartButton;
+    private JButton reviewOrdersButton;
     DefaultListModel listModel = new DefaultListModel<>();
     private String name;
-    int finalCost;
-    ArrayList<Order> orderList = new ArrayList<>();
+    private int finalCost;
     ArrayList<String> transferList = new ArrayList<>();
 
 
@@ -28,7 +28,7 @@ public class CheckoutWindow {
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
         jFrame.setContentPane(checkoutWindow);
-        jFrame.setSize(1000, 1000);
+        jFrame.setSize(600, 600);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         checkoutListRefresh(productsToCheckoutArrayList);
@@ -55,7 +55,7 @@ public class CheckoutWindow {
                     for (Product p : productsToCheckoutArrayList) {
                         transferList.add(p.getName());
                     }
-                    orderList.add(new Order(name, finalCost, transferList));
+                    productManager.orderArrayList.add(new Order(name, finalCost, transferList));
                     currentUser.setBalance(currentUser.getBalance() - finalCost);
                     Shop.Save(productManager, admin);
                     CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
@@ -82,6 +82,13 @@ public class CheckoutWindow {
                     productsToCheckoutArrayList.remove(removeIndex);
                     checkoutListRefresh(productsToCheckoutArrayList);
                 }
+            }
+        });
+        reviewOrdersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PastPurchasesWindow past = new PastPurchasesWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
+                jFrame.dispose();
             }
         });
     }

@@ -22,8 +22,10 @@ public class Review {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    public Review(String text, Customer currentUser) {
+    public Review(String text, Customer currentUser, int selectedRating) {
         this.text = text;
         this.customer = currentUser;
+        this.rating = selectedRating;
+        //la till rating i constructor
     }
 }

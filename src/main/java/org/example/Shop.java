@@ -75,7 +75,7 @@ public class Shop {
             FileWriter fileWriter = new FileWriter(ordersSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < productManager.orderArrayList.size(); i++) {
-                bufferedWriter.write(productManager.orderArrayList.get(i).GetCSV());
+                bufferedWriter.write(productManager.orderArrayList.get(i).getCSV());
                 if (i < productManager.orderArrayList.size() - 1) {
                     bufferedWriter.newLine();
                 }
@@ -96,7 +96,7 @@ public class Shop {
             FileWriter fileWriter = new FileWriter(usersSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < admin.EmployeeList.size(); i++) {
-                bufferedWriter.write(admin.EmployeeList.get(i).GetCSV());
+                bufferedWriter.write(admin.EmployeeList.get(i).getCSV());
                 if (i < admin.EmployeeList.size() - 1) {
                     bufferedWriter.newLine();
                 }
@@ -107,7 +107,7 @@ public class Shop {
                 }
             }
             for (int i = 0; i < admin.CustomerList.size(); i++) {
-                bufferedWriter.write(admin.CustomerList.get(i).GetCSV());
+                bufferedWriter.write(admin.CustomerList.get(i).getCSV());
                 if (i < admin.CustomerList.size() - 1) {
                     bufferedWriter.newLine();
                 }

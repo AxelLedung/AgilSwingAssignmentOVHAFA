@@ -17,8 +17,21 @@ public class Order {
         this.orderList = orderList;
     }
 
+    public String getDescription(){
+        String bracketLess = orderList.toString().replace("[","").replace("]","");
+        return id + ", " + customerName + ", " + orderSum + ", " + bracketLess;
+    }
+
     public String getCustomerName() {
         return customerName;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public int getSum(){
+        return orderSum;
     }
 
     public void setCustomerName(String customerName) {
@@ -37,7 +50,26 @@ public class Order {
         return orderList;
     }
 
+    public String getOrderItem(ArrayList<String> listItem) {
+        return listItem.toString();
+    }
+
     public void setOrderList(ArrayList<String> orderList) {
         this.orderList = orderList;
+    }
+    public String getCSV() {
+        String orderListString = null;
+        if (!orderList.isEmpty()) {
+            for (int i = 0; i < orderList.size(); i++) {
+                if (i == orderList.size() - 1)
+                {
+                    orderListString = orderListString += orderList.get(i);
+                }
+                else {
+                    orderListString = orderListString += orderList.get(i) + "#";
+                }
+            }
+        }
+        return customerName + "," + orderSum + "," + orderListString;
     }
 }
