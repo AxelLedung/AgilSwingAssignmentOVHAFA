@@ -1,8 +1,8 @@
 package org.example;
 
 public class User {
-    private String userName;
-    private String password;
+    protected String userName;
+    protected String password;
 
     public User(String userName, String password) {
         this.userName = userName;

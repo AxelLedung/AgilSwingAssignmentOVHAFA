@@ -1,8 +1,6 @@
 package org.example;
 
 public class Customer extends User {
-    String userName;
-    String password;
     private int balance;
 
     public Customer( String userName, String password, int balance) {

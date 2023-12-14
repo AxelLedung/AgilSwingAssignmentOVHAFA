@@ -8,7 +8,6 @@ import java.util.Arrays;
 public class Shop {
     private static File productsSaveFile = new File("products-save.txt");
     private static File usersSaveFile = new File("users-save.txt");
-    private static File reviewsSaveFile = new File("reviews-save.txt");
     private static File categorySaveFile = new File("category-save.txt");
     private static File ordersSaveFile = new File("orders-save.txt");
     ProductManager productManager = new ProductManager();
@@ -19,21 +18,19 @@ public class Shop {
     }
     public static boolean Save(ProductManager productManager, Admin admin) {
         SaveUsers(admin);
-        SaveReviews(productManager);
         SaveCategories(productManager);
         SaveOrders(productManager);
-        SaveProducts(productManager);
+        SaveProducts(productManager, admin);
         return true;
     }
     public static boolean Load(ProductManager productManager, Admin admin) {
         LoadUsers(admin);
         LoadCategories(productManager);
-        //LoadReviews
         LoadOrders(productManager);
-        LoadProducts(productManager);
+        LoadProducts(productManager, admin);
         return true;
     }
-    public static boolean SaveProducts(ProductManager productManager) {
+    public static boolean SaveProducts(ProductManager productManager, Admin admin) {
         try {
             FileWriter fileWriter = new FileWriter(productsSaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -44,13 +41,13 @@ public class Shop {
                 }
             }
             bufferedWriter.close();
-            System.out.println("Saved succesfully!");
-            LoadProducts(productManager);
+            System.out.println("Saved Products and Reviews!");
+            LoadProducts(productManager, admin);
             return true;
         }
         catch (Exception e) {
-            System.out.println("Save failed...");
-            LoadProducts(productManager);
+            System.out.println("Failed to save Products and Reviews!");
+            LoadProducts(productManager, admin);
             return false;
         }
     }
@@ -65,12 +62,12 @@ public class Shop {
                 }
             }
             bufferedWriter.close();
-            System.out.println("Saved succesfully!");
+            System.out.println("Saved Categories!");
             LoadCategories(productManager);
             return true;
         }
         catch (Exception e) {
-            System.out.println("Save failed...");
+            System.out.println("Failed to save Categories");
             LoadCategories(productManager);
             return false;
         }
@@ -86,12 +83,12 @@ public class Shop {
                 }
             }
             bufferedWriter.close();
-            System.out.println("Saved succesfully!");
+            System.out.println("Saved Orders!");
             LoadOrders(productManager);
             return true;
         }
         catch (Exception e) {
-            System.out.println("Save failed...");
+            System.out.println("Failed to save Orders!");
             LoadOrders(productManager);
             return false;
         }
@@ -118,20 +115,17 @@ public class Shop {
                 }
             }
             bufferedWriter.close();
-            System.out.println("Saved succesfully!");
+            System.out.println("Saved Users!");
             LoadUsers(admin);
             return true;
         }
         catch (Exception e) {
-            System.out.println("Save failed...");
+            System.out.println("Failed to save Users!");
             LoadUsers(admin);
             return false;
         }
     }
-    public static boolean SaveReviews(ProductManager productManager) {
-        return true;
-    }
-    private static boolean LoadProducts(ProductManager productManager) {
+    private static boolean LoadProducts(ProductManager productManager, Admin admin) {
         try {
             FileReader fileReader = new FileReader(productsSaveFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -143,6 +137,9 @@ public class Shop {
                 String productCategory = variables[1];
                 int productCost = Integer.parseInt(variables[2]);
                 int quantity = Integer.parseInt(variables[3]);
+                String[] reviewVariables = variables[4].split("#");
+
+                // Checking if the chosen category exists if not create it. -- START
                 String category = null;
                 String categoryFound = null;
                 for (String s : productManager.categoryArrayList) {
@@ -152,12 +149,28 @@ public class Shop {
                 }
                 if (categoryFound == null) {
                     productManager.categoryArrayList.add(productCategory);
-                    productManager.productArrayList.add(new Product(productName, productCategory, productCost, quantity));
+                    category = productCategory;
                 }
                 else {
                     category = categoryFound;
-                    productManager.productArrayList.add(new Product(productName, category, productCost, quantity));
                 }
+                // Checking if the chosen category exists if not create it. -- END
+
+                //Turn review string into a Review Object -- START
+                String reviewText = reviewVariables[0];
+                Customer reviewCustomer = null;
+                for (Customer c : admin.CustomerList) {
+                    if (c.getUsername().equals(reviewVariables[1])) {
+                        reviewCustomer = c;
+                    }
+                }
+                int reviewRating = Integer.parseInt(reviewVariables[2]);
+                Product product = new Product(productName, category, productCost, quantity);
+                productManager.productArrayList.add(product);
+                ArrayList<Review> reviewArrayList = new ArrayList<Review>();
+                reviewArrayList.add(new Review(reviewText, reviewCustomer, reviewRating));
+                //Turn review string into a Review Object -- END
+
                 line = bufferedReader.readLine();
             }
             return true;
@@ -185,7 +198,7 @@ public class Shop {
                         String[] variables = line.split(",");
                         String userName = variables[0];
                         String password = variables[1];
-                        admin.EmployeeList.add(new Employee(userName, password));
+                        admin.AddEmloyee(userName, password);
                         line = bufferedReader.readLine();
                     }
                     else {
@@ -193,7 +206,7 @@ public class Shop {
                         String userName = variables[0];
                         String password = variables[1];
                         int balance = Integer.parseInt(variables[2]);
-                        admin.CustomerList.add(new Customer(userName, password, balance));
+                        admin.AddCustomer(userName, password, balance);
                         line = bufferedReader.readLine();
                     }
                 }
@@ -231,30 +244,6 @@ public class Shop {
             String line = bufferedReader.readLine();
             productManager.orderArrayList.clear();
             while (line != null) {
-                String[] variables = line.split(",");
-                String customerName = variables[0];
-                int orderSum = Integer.parseInt(variables[1]);
-                String[] orderListStringArray = variables[2].split("#");
-                ArrayList<String> orderList = new ArrayList<String>();
-                orderList.addAll(Arrays.asList(orderListStringArray));
-                productManager.orderArrayList.add(new Order(customerName, orderSum, orderList));
-                line = bufferedReader.readLine();
-            }
-            return true;
-        }
-        catch (Exception e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-    private static boolean LoadReviews(ProductManager productManager) {
-        try {
-            FileReader fileReader = new FileReader(ordersSaveFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = bufferedReader.readLine();
-            productManager.orderArrayList.clear();
-            while (line != null) {
-                DENNA FUNKTION ÄR INTE KLAR
                 String[] variables = line.split(",");
                 String customerName = variables[0];
                 int orderSum = Integer.parseInt(variables[1]);

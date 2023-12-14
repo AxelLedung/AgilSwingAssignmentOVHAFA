@@ -1,10 +1,8 @@
 Kent,1234
-Gunvald,1234
-andreas,1234
-anders,1234
-andrea,1234
-Freddie,1234
+Ingvar,1234
+Ulla,1234
 @
-Ingvar,1234,3000
-Ulla,1234,3000
 axel,1234,500
+lars,1234,500
+karl,1234,500
+lotta,1234,500

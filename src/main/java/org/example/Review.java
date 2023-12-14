@@ -28,4 +28,7 @@ public class Review {
         this.rating = selectedRating;
         //la till rating i constructor
     }
+    public String getCSV() {
+        return text + "," + customer.getUsername() + "," + rating;
+    }
 }

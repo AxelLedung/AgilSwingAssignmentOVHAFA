@@ -16,7 +16,19 @@ public class Product {
         this.quantity = quantity;
     }
     public String GetCSV() {
-        return name + "," + category + "," + cost + "," + quantity;
+        String reviewListString = null;
+        if (!reviewArrayList.isEmpty()) {
+            for (int i = 0; i < reviewArrayList.size(); i++) {
+                if (i == reviewArrayList.size() - 1)
+                {
+                    reviewListString = reviewListString += reviewArrayList.get(i).getCSV();
+                }
+                else {
+                    reviewListString = reviewListString += reviewArrayList.get(i) + "#";
+                }
+            }
+        }
+        return name + "," + category + "," + cost + "," + quantity + "," + reviewListString;
     }
     public boolean checkQuantity(int quantity){
         if(this.quantity > 0) {

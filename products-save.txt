@@ -1,13 +1,1 @@
-Handdrill,Tool,20,5
-Steel,Hardware,200,25
-Nuts M12,Hardware,12,3
-Drill,Tool,30,5
-Screwdriver,Tool,53,2
-Socketwrench M9,Tool,80,8
-Socketwrench M10,Tool,90,9
-Socketwrench M11,Tool,34,12
-Socketwrench M12,Tool,32,13
-Socketwrench M13,Tool,21,13
-Sheet Metal,Hardware,124,13
-Oil hose 1m,Hardware,10,25
-Oil hose 0.5m,Tool,7,10
+Socketwrench M10,Tools,30,5,null
