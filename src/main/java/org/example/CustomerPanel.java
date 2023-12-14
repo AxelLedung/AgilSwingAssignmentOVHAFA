@@ -83,7 +83,7 @@ public class CustomerPanel {
                 super.mouseClicked(e);
                 int index = jProductList.getSelectedIndex();
                 jNameLabel.setText(productManager.productArrayList.get(index).getName());
-                jCategoryLabel.setText(productManager.productArrayList.get(index).getCategory().getName());
+                jCategoryLabel.setText(productManager.productArrayList.get(index).getCategory());
                 jCostLabel.setText(Integer.toString(productManager.productArrayList.get(index).getCost()));
                 String reviewString = "";
                 for (Review r : productManager.productArrayList.get(index).getReviewArrayList()) {
@@ -121,7 +121,7 @@ public class CustomerPanel {
     public void DisplayProductsByCategory(ProductManager productManager) {
         productListModel.clear();
         ArrayList<Product> sortedProductList = productManager.productArrayList;
-        sortedProductList.sort((p1, p2) -> p1.getCategory().getName().compareTo(p2.getCategory().getName()));
+        sortedProductList.sort((p1, p2) -> p1.getCategory().compareTo(p2.getCategory()));
         for (int i = 0; i < sortedProductList.size(); i++) {
             productListModel.addElement(sortedProductList.get(i).GetDescription());
         }

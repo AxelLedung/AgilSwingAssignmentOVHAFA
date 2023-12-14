@@ -54,7 +54,7 @@ public class Shop {
             FileWriter fileWriter = new FileWriter(categorySaveFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < productManager.categoryArrayList.size(); i++) {
-                bufferedWriter.write(productManager.categoryArrayList.get(i).getName());
+                bufferedWriter.write(productManager.categoryArrayList.get(i));
                 if (i < productManager.categoryArrayList.size() - 1) {
                     bufferedWriter.newLine();
                 }
@@ -138,21 +138,21 @@ public class Shop {
                 String productCategory = variables[1];
                 int productCost = Integer.parseInt(variables[2]);
                 int quantity = Integer.parseInt(variables[3]);
-                Category category;
-                Category categoryFound = null;
-                for (Category c : productManager.categoryArrayList) {
-                    if (c.getName().equals(productCategory) && categoryFound == null) {
-                        categoryFound = c;
+                String category = null;
+                String categoryFound = null;
+                for (String s : productManager.categoryArrayList) {
+                    if (s.equals(productCategory) && categoryFound == null) {
+                        categoryFound = s;
                     }
                 }
                 if (categoryFound == null) {
-                    category = new Category(productCategory);
+                    productManager.categoryArrayList.add(productCategory);
+                    productManager.productArrayList.add(new Product(productName, productCategory, productCost, quantity));
                 }
                 else {
                     category = categoryFound;
+                    productManager.productArrayList.add(new Product(productName, category, productCost, quantity));
                 }
-                productManager.categoryArrayList.add(category);
-                productManager.productArrayList.add(new Product(productName, category, productCost, quantity));
                 line = bufferedReader.readLine();
             }
             return true;
@@ -209,8 +209,7 @@ public class Shop {
             while (line != null) {
                 String[] variables = line.split(",");
                 String categoryName = variables[0];
-                Category category = new Category(categoryName);
-                productManager.categoryArrayList.add(category);
+                productManager.categoryArrayList.add(categoryName);
                 line = bufferedReader.readLine();
             }
             return true;

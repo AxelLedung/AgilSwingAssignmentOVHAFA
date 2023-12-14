@@ -5,18 +5,18 @@ import java.util.ArrayList;
 public class Product {
     private String name;
     private int cost;
-    private Category category;
+    private String category;
     private int quantity;
     private ArrayList<Review> reviewArrayList = new ArrayList<Review>();
 
-    public Product(String name, Category category, int cost, int quantity) {
+    public Product(String name, String category, int cost, int quantity) {
         this.name = name;
         this.category = category;
         this.cost = cost;
         this.quantity = quantity;
     }
     public String GetCSV() {
-        return name + "," + category.getName() + "," + cost + "," + quantity;
+        return name + "," + category + "," + cost + "," + quantity;
     }
     public boolean checkQuantity(int quantity){
         if(this.quantity > 0) {
@@ -45,10 +45,10 @@ public class Product {
     public void setCost(int cost) {
         this.cost = cost;
     }
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
     public int getQuantity() {
