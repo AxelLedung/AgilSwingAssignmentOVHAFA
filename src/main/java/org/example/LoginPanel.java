@@ -3,6 +3,8 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginPanel {
     private JPanel panel1;
@@ -10,11 +12,10 @@ public class LoginPanel {
     private JPasswordField passwordField;
     private JButton registerButton;
     private JButton loginButton;
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
     private JLabel messageLabel;
     private String adminUsername = "admin";
     private String adminPassword = "1234";
+    Error errorWindow;
 
     public LoginPanel(ProductManager productManager, Admin admin) {
         JFrame jFrame = new JFrame();
@@ -25,7 +26,28 @@ public class LoginPanel {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
+                boolean exists = false;
+
+                // Check customer list if username exists.
+                for (User user : admin.CustomerList) {
+                    if (usernameTextField.getText().equals(user.getUsername())) {
+                        exists = true;
+                        errorWindow = new Error("Error", "Username already exists!");
+                        break;
+                    }
+                }
+
+                // Check employee list if username exists.
+                for (User user : admin.EmployeeList) {
+                    if (usernameTextField.getText().equals(user.getUsername())) {
+                        exists = true;
+                        errorWindow = new Error("Error", "Username already exists!");
+                        break;
+                    }
+                }
+
+                // Register a new customer if text field is not empty and username is available.
+                if (!usernameTextField.getText().isEmpty() && !passwordField.getText().isEmpty() && !exists) {
                     String username = usernameTextField.getText();
                     String password = passwordField.getText();
                     admin.AddCustomer(username, password, 500);
@@ -33,6 +55,7 @@ public class LoginPanel {
                 }
             }
         });
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,7 +87,25 @@ public class LoginPanel {
                     }
                 }
                 if(!found) {
-                    messageLabel.setText("Wrong credentials.");
+                    errorWindow = new Error("Error", "Wrong credentials.");
+                }
+            }
+        });
+
+        usernameTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    loginButton.doClick();
+                }
+            }
+        });
+
+        passwordField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    loginButton.doClick();
                 }
             }
         });

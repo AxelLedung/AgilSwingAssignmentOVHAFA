@@ -6,7 +6,7 @@ public class ProductManager {
     ArrayList<Product> productArrayList = new ArrayList<Product>();
     ArrayList<String> categoryArrayList = new ArrayList<String>();
     ArrayList<Order> orderArrayList = new ArrayList<Order>();
-    ArrayList<Order> refundList = new ArrayList<Order>();
+    ArrayList<Order> refundArrayList = new ArrayList<>();
      public ProductManager(){
          categoryArrayList.add("Tools");
          categoryArrayList.add("Hardware");

@@ -18,9 +18,8 @@ public class CheckoutWindow {
     private JButton removeFromCartButton;
     private JButton reviewOrdersButton;
     DefaultListModel listModel = new DefaultListModel<>();
-    private String name;
     private int finalCost;
-    ArrayList<String> transferList = new ArrayList<>();
+
 
 
 
@@ -44,26 +43,8 @@ public class CheckoutWindow {
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean purchased = false;
-                for (Product pr : productsToCheckoutArrayList) {
-                    if (currentUser.getBalance() >= finalCost && pr.checkQuantity(pr.getQuantity())) {
-                       purchased = true;
-                    }
-                }
-                if(purchased){
-                    name = currentUser.getUsername();
-                    for (Product p : productsToCheckoutArrayList) {
-                        transferList.add(p.getName());
-                    }
-                    productManager.orderArrayList.add(new Order(name, finalCost, transferList));
-                    currentUser.setBalance(currentUser.getBalance() - finalCost);
-                    CustomerPanel customerPanel = new CustomerPanel(productManager, currentUser, admin);
-                    jFrame.dispose();
-                }
-                else {
-                    costLabel.setText("You don't have enough money to finalize the purchase" +
-                            " or there aren't enough items in stock.");
-                }
+                CardWindow cardWindow = new CardWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
+                jFrame.dispose();
             }
         });
         logOutButton.addActionListener(new ActionListener() {
