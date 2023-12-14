@@ -1,6 +1,10 @@
 package org.example;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +18,7 @@ public class EditProduct {
     private JButton editProductButton;
     private JCheckBox confirmCheckBox;
     private JPanel editPanel;
-    private JButton applyEditingsButton;
+    private JButton applyButton;
     private JButton cancelButton;
     private JLabel messageLabel;
     private JPanel mainPanel;
@@ -32,14 +36,29 @@ public class EditProduct {
         for (int i = 0; i < productManager.productArrayList.size(); i++) {
             productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
         }
+        applyButton.setEnabled(false);
+        deletProductButton.setEnabled(false);
+        editProductButton.setEnabled(false);
+
         deletProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int index = productJlist.getSelectedIndex();
                 if (confirmCheckBox.isSelected()){
-                    int index = productJlist.getSelectedIndex();
+
                     productManager.productArrayList.remove(index);
                     productListModel.removeElementAt(index);
+                    messageLabel.setText(productNameField.getText()+" has been deleted successfully!");
+                    confirmCheckBox.setSelected(false);
+                    editProductButton.setEnabled(false);
+                    deletProductButton.setEnabled(false);
+                    productNameField.setText("");
+                    productPriceField.setText("");
+                    productCategoryField.setText("");
+                    productQuantityField.setText("");
                 }
+
+
             }
         });
         editProductButton.addActionListener(new ActionListener() {
@@ -51,9 +70,11 @@ public class EditProduct {
                 productPriceField.setText(""+selectedProduct.getCost());
                 productCategoryField.setText(selectedProduct.getCategory());
                 productQuantityField.setText(""+ selectedProduct.getQuantity());
+                editProductButton.setEnabled(false);
+                applyButton.setEnabled(true);
             }
         });
-        applyEditingsButton.addActionListener(new ActionListener() {
+        applyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!productNameField.getText().isEmpty()&&!productPriceField.getText().isEmpty()&&!productCategoryField.getText().isEmpty()&&!productQuantityField.getText().isEmpty()){
@@ -63,7 +84,7 @@ public class EditProduct {
                         selectedProduct.setCategory(productCategoryField.getText());
                         selectedProduct.setQuantity(Integer.parseInt(productQuantityField.getText()));
 //                        EmployeePanel employeePanel = new EmployeePanel(productManager, admin, currentEmployee);
-                        //Save()....VÄNTAR PÅ AXEL.
+//                        Save()....VÄNTAR PÅ AXEL.
                         messageLabel.setText(productNameField.getText()+" has been edited successfully!");
                         //Inte säker hur man uppdaterar JListen.
                         //Här ska confirmCheckBox bli tom igen
@@ -71,7 +92,7 @@ public class EditProduct {
                         productPriceField.setText("");
                         productCategoryField.setText("");
                         productQuantityField.setText("");
-
+                        applyButton.setEnabled(false);
 
 
                     } catch (Exception exception){
@@ -87,6 +108,27 @@ public class EditProduct {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jFrame.setVisible(false);
+            }
+        });
+        productJlist.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+//                deletProductButton.setEnabled(true);
+                editProductButton.setEnabled(true);
+            }
+        });
+        confirmCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+                if (confirmCheckBox.isSelected()){
+                    deletProductButton.setEnabled(true);
+                    editProductButton.setEnabled(false);
+                } else if (!confirmCheckBox.isSelected()){
+                    deletProductButton.setEnabled(false);
+//                    editProductButton.setEnabled(false);
+                }
+
             }
         });
     }
