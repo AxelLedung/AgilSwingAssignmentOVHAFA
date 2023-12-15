@@ -6,3 +6,5 @@
 5,victor,12,556 Lubricant spray#
 6,victor,40,Motoroil Fully-Synthetic 5W-60 1 liter#
 8,niklas,80,Motoroil Fully-Synthetic 5W-60 1 liter#Motoroil Fully-Synthetic 5W-60 4 liter
+9,hampus,13,Green Spray Color#
+10,hampus,45,Handdrill Makita#

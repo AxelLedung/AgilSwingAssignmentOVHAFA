@@ -46,7 +46,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println("Failed to save Products and Reviews!");
+            System.out.println("Failed to save Products and Reviews!" + e);
             LoadProducts(productManager, admin);
             return false;
         }
@@ -67,7 +67,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println("Failed to save Categories");
+            System.out.println("Failed to save Categories" + e);
             LoadCategories(productManager);
             return false;
         }
@@ -88,7 +88,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println("Failed to save Orders!");
+            System.out.println("Failed to save Orders!" + e);
             LoadOrders(productManager);
             return false;
         }
@@ -120,7 +120,7 @@ public class Shop {
             return true;
         }
         catch (Exception e) {
-            System.out.println("Failed to save Users!");
+            System.out.println("Failed to save Users!" + e);
             LoadUsers(admin);
             return false;
         }
@@ -170,12 +170,19 @@ public class Shop {
                         String reviewCustomerString = review[1];
                         int reviewRating = Integer.parseInt(review[2]);
                         Customer reviewCustomer = null;
-                        for (Customer c : admin.CustomerList) {
-                            if (c.getUsername().equals(reviewCustomerString)) {
-                                reviewCustomer = c;
+                        try {
+                            for (Customer c : admin.CustomerList) {
+                                if (c.getUsername().equals(reviewCustomerString)) {
+                                    reviewCustomer = c;
+                                }
+                            }
+                            if (reviewCustomer != null) {
+                                reviewArrayList.add(new Review(reviewText, reviewCustomer, reviewRating));
                             }
                         }
-                        reviewArrayList.add(new Review(reviewText, reviewCustomer, reviewRating));
+                        catch (Exception e) {
+                            System.out.println("Review was not able to load to removal of user");
+                        }
                     }
                     product.setReviewArrayList(reviewArrayList);
                 }
