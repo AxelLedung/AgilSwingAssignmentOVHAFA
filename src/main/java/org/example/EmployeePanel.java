@@ -8,14 +8,14 @@ public class EmployeePanel {
 
     private JButton createProductBtton;
     private JButton editProductButton;
-    private JButton removeProductButton;
+
     private JPanel employeePanel;
     private JLabel currentEmployeeLabel;
     private JList productsJlist;
     private JButton logoutButton;
     private JButton manageReviewsButton;
-    private Employee currentEmployee;
-    private Product selectedProduct;
+
+
 //    private DefaultListModel productListModel = new DefaultListModel();
 
 
@@ -30,25 +30,14 @@ public class EmployeePanel {
 //            productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
 //        }
         currentEmployeeLabel.setText("Welcome "+currentEmployee.getUsername());
-        removeProductButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditProduct editProduct = new EditProduct(productManager);
             }
         });
-        manageReviewsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-
-            }
-        });
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +49,12 @@ public class EmployeePanel {
             public void actionPerformed(ActionEvent e) {
                 LoginPanel loginPanel = new LoginPanel(productManager, admin);
                 jFrame.setVisible(false);
+            }
+        });
+        manageReviewsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ManageReviewsWindow manageReviewsWindow = new ManageReviewsWindow(productManager);
             }
         });
     }
