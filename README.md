@@ -8,5 +8,8 @@ Klassdiagram:
 Kravhantering:
 https://docs.google.com/spreadsheets/d/1T0AJjhi6qcQrDXZg3NATTSr44bn69bBiPjbRuNsZtfo/edit#gid=0
 
-Sprint Retrospective:
+Sprint Retrospective 1:
 https://docs.google.com/document/d/1qOCe0jHFwEGl1N9Gv-oGnvNeXGhXrHh92-Iwx0n-OaM/edit?usp=sharing
+
+Sprint Retrospective 2:
+https://docs.google.com/document/d/1Y-L7om6a3vwiQO7hAVhM5xO-yh2H4VT77aJIlwhAO3c/edit?usp=sharing
