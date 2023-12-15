@@ -1,18 +1,20 @@
-556 Lubricant spray,Canister,12,10,Jag gillar denna product@axel@2#Jag gillar denna produkt @lars@1
+556 Lubricant spray,Canister,12,10,Jag gillar denna product@axel@2#Jag gillar denna produkt @lars@1#556 är bra!@axel@2#dålig olja@victor@2#Jag refundade denna produkt jag tyckte wd40 var bättre@niklas@1
+BMW Oil filter,Car parts,25,4,Bra olja@axel@3#
 Blue Spray Color,Canister,13,25
-Crowbar,Tools,50,4
+Crowbar,Tools,45,3
 Green Spray Color,Canister,13,25
-Handdrill Makita,Tools,100,3
-Motoroil Fully-Synthetic 5W-60 1 liter,Liquid,40,13,Den här oljan funkade jättebra@lars@5#
+Handdrill Makita,Tools,45,3
+Lantern,Decoration,25,12
+Motoroil Fully-Synthetic 5W-60 1 liter,Liquid,40,12,Den här oljan funkade jättebra@lars@5#
 Motoroil Fully-Synthetic 5W-60 4 liter,Liquid,40,10
 Motoroil Semi-Synthetic 10W-60 4 liter,Liquid,40,12
-Motoroil Semi-Synthetic 5W-60 1 liter,Liquid,40,12
+Motoroil Semi-Synthetic 5W-60 1 liter,Liquid,40,11
 Nuts M10,Hardware,2,1000
 Nuts M11,Hardware,2,999
-Nuts M12,Hardware,2,1000
+Nuts M12,Hardware,2,999
 Nuts M13,Hardware,2,1000
 Nuts M14,Hardware,2,1000
-Nuts M15,Hardware,2,1000
+Nuts M15,Hardware,2,999
 Nuts M9,Hardware,2,1000
 Red Spray Color,Canister,13,25
 Socketwrench M10,Tools,10,25
@@ -22,9 +24,9 @@ Socketwrench M13,Tools,19,25
 Socketwrench M14,Tools,21,25
 Socketwrench M15,Tools,23,25
 Socketwrench M9,Tools,9,25
+VW Oil filter,Car parts,30,3
 WD40 250ml,Liquids,7,25
 WD40 500ml,Liquids,10,30
-Yellow Spray Color,Canister,13,25
 Zipties Large,Utilities,5,50
 Zipties Medium,Utilities,3,50
-Zipties Small,Utilities,2,60
+Mercedes Oil Filter,Car parts,39,4

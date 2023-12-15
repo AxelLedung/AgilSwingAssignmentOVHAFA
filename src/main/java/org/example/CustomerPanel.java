@@ -21,7 +21,6 @@ public class CustomerPanel {
     private JButton sortCategoryButton;
     private JButton sortPriceButton;
     private JPanel productInformationPanel;
-    private JTextField searchTextField;
     private JButton searchButton;
     private JPanel showProductDisplay;
     private JPanel productCheckoutPanel;
@@ -108,12 +107,6 @@ public class CustomerPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DisplayProductsByName(productManager);
-            }
-        });
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
             }
         });
     }

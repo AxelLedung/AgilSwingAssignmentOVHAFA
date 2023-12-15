@@ -30,7 +30,6 @@ public class AddProductWindow {
                     String newProductCategory = productCategoryField.getText();
                     int newProductQuantity = Integer.parseInt(productQuantityField.getText());
                     if (!newProductName.isEmpty()&&newProductQuantity>=0&&!newProductCategory.isEmpty()&&newProductCost>=1){
-                        //Save() ...VÄNTAR PÅ AXEL
                         productManager.productArrayList.add(new Product(newProductName, newProductCategory, newProductCost, newProductQuantity));
                         //Här nedan töms fieldsen efter man har sparat den nya produkten.
                         productNameField.setText("");

@@ -30,7 +30,7 @@ public class EmployeePanel {
 //            productListModel.addElement(productManager.productArrayList.get(i).GetDescription());
 //        }
         currentEmployeeLabel.setText("Welcome "+currentEmployee.getUsername());
-        removeProductButton.addActionListener(new ActionListener() {
+        /*removeProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = productsJlist.getSelectedIndex();
@@ -38,19 +38,19 @@ public class EmployeePanel {
                 productListModel.removeElementAt(index);
                 Shop.Save(productManager, admin);
             }
-        });
+        });*/
         editProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditProduct editProduct = new EditProduct(productManager, admin);
             }
         });
-        manageReviewsButton.addActionListener(new ActionListener() {
+        /*manageReviewsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
             }
-        });
+        });*/
         createProductBtton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
