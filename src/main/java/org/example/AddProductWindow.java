@@ -17,7 +17,7 @@ public class AddProductWindow {
     public AddProductWindow(ProductManager productManager){
         JFrame jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        jFrame.setSize(300, 400);
+        jFrame.setSize(400, 400);
         jFrame.setLocation(60, 60);
         jFrame.setContentPane(panel1);
         jFrame.setVisible(true);
