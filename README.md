@@ -4,7 +4,7 @@ Gruppnamn: OVHAFA
 Gruppmedlemmar: Ahmad, Axel, Filip, Hampus, Oskar Victor
 
 Trello:
-https://trello.com/b/QNPYACTF/grupparbete
+[https://trello.com/b/QNPYACTF/grupparbete](https://trello.com/invite/b/QNPYACTF/ATTI7fbd4f49546d8e40ac5765c09e0a640492D9BB6B/grupparbete)
 
 Klassdiagram:
 [https://app.diagrams.net/#G1G6hgsNat1TGyMLwXDxWC4mLKA0KhSMk_](https://drive.google.com/file/d/1G6hgsNat1TGyMLwXDxWC4mLKA0KhSMk_/view?usp=sharing)
