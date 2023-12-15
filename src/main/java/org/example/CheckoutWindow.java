@@ -20,16 +20,20 @@ public class CheckoutWindow {
     DefaultListModel listModel = new DefaultListModel<>();
     private int finalCost;
 
-    public CheckoutWindow(Customer currentUser , ProductManager productManager, ArrayList<Product> productsToCheckoutArrayList, Admin admin) {
+    // Creates the CheckoutWindow where the user can go through their cart before trying to purchase any items.
+    public CheckoutWindow(Customer currentUser , ProductManager productManager
+            , ArrayList<Product> productsToCheckoutArrayList, Admin admin) {
         checkoutJList.setModel(listModel);
         jFrame = new JFrame("Checkout");
         jFrame.setContentPane(checkoutWindow);
         jFrame.setSize(600, 600);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jFrame.setLocationRelativeTo(null);
         checkoutListRefresh(productsToCheckoutArrayList);
         userLabel.setText("Current user: " + currentUser.getUsername());
 
+        // Takes you back to the Storefront if pressed.
         goBackToShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,6 +41,8 @@ public class CheckoutWindow {
                 jFrame.dispose();
             }
         });
+        // Takes you to the card related part of the checkout if pressed, here the user can register cards or
+        // verify already registered cards to be used when completing their purchase of items.
         makePurchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +50,7 @@ public class CheckoutWindow {
                 jFrame.dispose();
             }
         });
+        //Takes you back to the login screen if pressed.
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,6 +58,7 @@ public class CheckoutWindow {
                 jFrame.dispose();
             }
         });
+        // Removes the selected JList index from the cart if pressed.
         removeFromCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,14 +69,17 @@ public class CheckoutWindow {
                 }
             }
         });
+        // Takes you to the menu where you can overview past purchases and refund them if pressed.
         reviewOrdersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PastPurchasesWindow past = new PastPurchasesWindow(currentUser, productManager, productsToCheckoutArrayList, admin);
+                PastPurchasesWindow past = new PastPurchasesWindow(currentUser, productManager
+                        , productsToCheckoutArrayList, admin);
                 jFrame.dispose();
             }
         });
     }
+    // Used to visualize the list and to refresh it if any changes happen.
     private void checkoutListRefresh(ArrayList<Product> productsToCheckoutArrayList){
         finalCost = 0;
         for(Product p : productsToCheckoutArrayList){
