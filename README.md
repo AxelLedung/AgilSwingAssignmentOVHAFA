@@ -1,4 +1,8 @@
 # AgilSwingAssignmentOVHAFA
+
+Gruppnamn: OVHAFA
+Gruppmedlemmar: Ahmad, Axel, Filip, Hampus, Oskar Victor
+
 Trello:
 https://trello.com/b/QNPYACTF/grupparbete
 
